@@ -2,4 +2,9 @@
     <string name="app_name">Intermediate_Submission1</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="icon">icon</string>
+    <string name="input_email">Masukkan Email</string>
+    <string name="input_password">Masukkan Password</string>
+    <string name="input">Input</string>
+    <string name="error_password">Password minimal memiliki 6 karakter</string>
 </resources>
