@@ -1,10 +1,12 @@
 package com.ahmadfma.intermediate_submission1.data.remote
 
+import com.ahmadfma.intermediate_submission1.data.model.GetStoryResponse
 import com.ahmadfma.intermediate_submission1.data.model.LoginResponse
 import com.ahmadfma.intermediate_submission1.data.model.MessageResponse
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface ApiService {
@@ -23,5 +25,8 @@ interface ApiService {
         @Field("email") email: String,
         @Field("password") password: String
     ): Response<LoginResponse>
+
+    @GET("stories")
+    suspend fun getStories(): Response<GetStoryResponse>
 
 }

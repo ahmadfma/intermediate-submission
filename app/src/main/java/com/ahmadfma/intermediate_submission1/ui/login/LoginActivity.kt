@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.ahmadfma.intermediate_submission1.R
 import com.ahmadfma.intermediate_submission1.data.Result
+import com.ahmadfma.intermediate_submission1.data.local.UserPreferences
+import com.ahmadfma.intermediate_submission1.data.model.LoginResponse
 import com.ahmadfma.intermediate_submission1.databinding.ActivityLoginBinding
 import com.ahmadfma.intermediate_submission1.helper.Validator
 import com.ahmadfma.intermediate_submission1.ui.list_story.ListStoryActivity
@@ -75,6 +77,7 @@ class LoginActivity : AppCompatActivity() {
                     Log.d(TAG, "Result Success: response : $response")
                     if (response != null) {
                         if (!response.error) {
+                            saveUserData(response)
                             Intent().apply {
                                 setClass(this@LoginActivity, ListStoryActivity::class.java)
                                 startActivity(this)
@@ -88,6 +91,13 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+    }
+
+    private fun saveUserData(response: LoginResponse) {
+        val pref = UserPreferences(this)
+        if(response.loginResult != null) {
+            pref.setUser(response.loginResult)
         }
     }
 

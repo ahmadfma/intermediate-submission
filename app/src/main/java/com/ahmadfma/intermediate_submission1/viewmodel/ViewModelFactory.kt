@@ -1,6 +1,5 @@
 package com.ahmadfma.intermediate_submission1.viewmodel
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ahmadfma.intermediate_submission1.injection.Injection
