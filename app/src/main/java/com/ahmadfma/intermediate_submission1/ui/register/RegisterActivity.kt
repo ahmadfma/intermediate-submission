@@ -2,9 +2,11 @@ package com.ahmadfma.intermediate_submission1.ui.register
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.ahmadfma.intermediate_submission1.R
+import com.ahmadfma.intermediate_submission1.data.Result
 import com.ahmadfma.intermediate_submission1.databinding.ActivityRegisterBinding
 import com.ahmadfma.intermediate_submission1.viewmodel.AuthenticationViewModel
 import com.ahmadfma.intermediate_submission1.viewmodel.ViewModelFactory
@@ -32,7 +34,7 @@ class RegisterActivity : AppCompatActivity() {
         signUpBtn.setOnClickListener {
             if(isAllFormFilled()) {
                 if(isFormValid()) {
-                    Toast.makeText(this@RegisterActivity, "ready", Toast.LENGTH_SHORT).show()
+                    registerUserListener()
                 } else {
                     Toast.makeText(this@RegisterActivity, getString(R.string.error_form_not_valid), Toast.LENGTH_SHORT).show()
                 }
@@ -44,6 +46,36 @@ class RegisterActivity : AppCompatActivity() {
         signInBtnRegister.setOnClickListener {
             onBackPressed()
         }
+    }
+
+    private fun registerUserListener() {
+        viewModel.registerUser(usernameInput, emailInput, passwordInput).observe(this) { result ->
+            if(result != null) {
+                when(result) {
+                    is Result.Loading -> {
+                        Log.d(TAG, "Result loading")
+                    }
+                    is Result.Error -> {
+                        Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                    }
+                    is Result.Success -> {
+                        val message = result.data
+                        if(message != null) {
+                            if(message.error) {
+                                Log.d(TAG, "Result Success: error : ${message.message}")
+                                Toast.makeText(this, message.message, Toast.LENGTH_SHORT).show()
+                            } else {
+                                loginUserListener()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun loginUserListener() {
+
     }
 
     private fun isAllFormFilled(): Boolean = with(binding) {
@@ -59,6 +91,10 @@ class RegisterActivity : AppCompatActivity() {
         return usernameInputRegister.error == null &&
                 emailInputRegister.error == null &&
                 passwordInputRegister.error == null
+    }
+
+    companion object {
+        const val TAG = "RegisterActivity"
     }
 
 }
