@@ -5,7 +5,7 @@
     <string name="icon">icon</string>
     <string name="input_email">Masukkan Email</string>
     <string name="input_password">Masukkan Password</string>
-    <string name="input">Input</string>
+    <string name="input">Masukkan Username</string>
     <string name="error_password">Password minimal memiliki 6 karakter</string>
     <string name="sign_in">Sign In</string>
     <string name="akun">don\'t have an account ?</string>
