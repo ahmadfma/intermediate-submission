@@ -29,11 +29,12 @@ class MainActivity : AppCompatActivity() {
             when(it.itemId) {
                 R.id.nav_home -> setCurrentFragment(HomeFragment())
                 R.id.nav_profile -> setCurrentFragment(ProfileFragment())
-                R.id.nav_add -> {
-                    Log.d(TAG, "bottomAppbarMain: nav add")
-                }
             }
             true
+        }
+
+        newStoryBtn.setOnClickListener {
+
         }
     }
 
