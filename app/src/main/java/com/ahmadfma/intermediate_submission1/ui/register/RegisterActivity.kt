@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.ahmadfma.intermediate_submission1.R
 import com.ahmadfma.intermediate_submission1.data.Result
 import com.ahmadfma.intermediate_submission1.databinding.ActivityRegisterBinding
+import com.ahmadfma.intermediate_submission1.helper.Validator
 import com.ahmadfma.intermediate_submission1.ui.list_story.ListStoryActivity
 import com.ahmadfma.intermediate_submission1.viewmodel.AuthenticationViewModel
 import com.ahmadfma.intermediate_submission1.viewmodel.ViewModelFactory
@@ -36,8 +37,11 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun initListener() = with(binding)  {
         signUpBtn.setOnClickListener {
-            if(isAllFormFilled()) {
-                if(isFormValid()) {
+            if(Validator.isAllFormFilled(arrayOf(usernameInputRegister, emailInputRegister, passwordInputRegister))) {
+                usernameInput = usernameInputRegister.text.toString()
+                emailInput = emailInputRegister.text.toString()
+                passwordInput = passwordInputRegister.text.toString()
+                if(Validator.isFormValid(arrayOf(usernameInputRegister, emailInputRegister, passwordInputRegister))) {
                     registerUserListener()
                 } else {
                     Toast.makeText(this@RegisterActivity, getString(R.string.error_form_not_valid), Toast.LENGTH_SHORT).show()
@@ -99,6 +103,7 @@ class RegisterActivity : AppCompatActivity() {
                             Intent().apply {
                                 setClass(this@RegisterActivity, ListStoryActivity::class.java)
                                 startActivity(this)
+                                finish()
                             }
                         } else {
                             Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
@@ -109,21 +114,6 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    private fun isAllFormFilled(): Boolean = with(binding) {
-        usernameInput = usernameInputRegister.text.toString()
-        emailInput = emailInputRegister.text.toString()
-        passwordInput = passwordInputRegister.text.toString()
-        return usernameInput.isNotEmpty() &&
-                emailInput.isNotEmpty() &&
-                passwordInput.isNotEmpty()
-    }
-
-    private fun isFormValid(): Boolean = with(binding) {
-        return usernameInputRegister.error == null &&
-                emailInputRegister.error == null &&
-                passwordInputRegister.error == null
     }
 
     private fun showProgressBar(isLoading: Boolean) = with(binding) {

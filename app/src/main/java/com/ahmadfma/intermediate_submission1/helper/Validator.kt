@@ -1,0 +1,25 @@
+package com.ahmadfma.intermediate_submission1.helper
+
+import android.widget.EditText
+
+object Validator {
+
+    fun isAllFormFilled(args: Array<EditText>): Boolean  {
+        for(editText in args) {
+            if(editText.text.toString().isEmpty()) {
+                return false
+            }
+        }
+        return true
+    }
+
+    fun isFormValid(args: Array<EditText>): Boolean  {
+        for(editText in args) {
+            if(editText.error != null) {
+                return false
+            }
+        }
+        return true
+    }
+
+}
