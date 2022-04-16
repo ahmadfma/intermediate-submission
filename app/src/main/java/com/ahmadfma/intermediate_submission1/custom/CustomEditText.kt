@@ -67,7 +67,7 @@ class CustomEditText : AppCompatEditText, View.OnTouchListener {
     }
 
     private fun isEmailValid() : Boolean {
-       return this.text.toString().trim().matches(emailPattern.toRegex())
+       return this.text.toString().matches(emailPattern.toRegex())
     }
 
     companion object {

@@ -11,20 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Intermediate_Submission1">
+
         <activity
-            android:name=".ui.main.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.add_story.AddStoryActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.detail.DetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.register.RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.login.LoginActivity"
+            android:name=".ui.splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,9 +21,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".ui.list_story.ListStoryActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".ui.add_story.AddStoryActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.detail.DetailActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.register.RegisterActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:exported="false"/>
+
     </application>
 
 </manifest>
