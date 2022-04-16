@@ -29,20 +29,6 @@ class CustomEditText : AppCompatEditText, View.OnTouchListener {
         clearButtonImage = ContextCompat.getDrawable(context, R.drawable.ic_close) as Drawable
         errorButtonImage = ContextCompat.getDrawable(context, R.drawable.ic_error) as Drawable
         setOnTouchListener(this)
-
-        addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (s.toString().isNotEmpty()) showClearButton() else hideClearButton()
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-
-            }
-        })
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -60,7 +46,6 @@ class CustomEditText : AppCompatEditText, View.OnTouchListener {
                 true -> {}
                 false -> {
                     if(inputType-1 == InputType.TYPE_TEXT_VARIATION_PASSWORD && text != null && text!!.length < 6) {
-                        hideClearButton()
                         error = context.getString(R.string.error_password)
                     }
                 }
@@ -88,8 +73,6 @@ class CustomEditText : AppCompatEditText, View.OnTouchListener {
 
     override fun onTouch(v: View?, event: MotionEvent): Boolean {
         if (compoundDrawables[2] != null ) {
-            Log.d(TAG, "drawable: compound : ${compoundDrawables[2].constantState}")
-            Log.d(TAG, "drawable: compare : ${ContextCompat.getDrawable(context, R.drawable.ic_close)!!.constantState}")
             val clearButtonStart: Float
             val clearButtonEnd: Float
             var isClearButtonClicked = false
