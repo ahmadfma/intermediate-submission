@@ -9,6 +9,8 @@ class ViewModelFactory: ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(AuthenticationViewModel::class.java)) {
             return AuthenticationViewModel(Injection.provideAuthenticationRepository()) as T
+        } else if(modelClass.isAssignableFrom(StoryViewModel::class.java)) {
+            return StoryViewModel(Injection.provideStoryRepository()) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
@@ -18,6 +20,8 @@ class ViewModelFactory: ViewModelProvider.NewInstanceFactory() {
         private var instance: ViewModelFactory? = null
         fun getInstance(): ViewModelFactory = instance ?: synchronized(this) {
             instance ?: ViewModelFactory()
-        }.also { instance = it }
+        }.also {
+            instance = it
+        }
     }
 }
