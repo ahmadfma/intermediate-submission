@@ -8,9 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ahmadfma.intermediate_submission1.R
 import com.ahmadfma.intermediate_submission1.data.Result
+import com.ahmadfma.intermediate_submission1.data.model.GetStoryResponse
 import com.ahmadfma.intermediate_submission1.databinding.FragmentHomeBinding
+import com.ahmadfma.intermediate_submission1.ui.adapter.StoryAdapter
 import com.ahmadfma.intermediate_submission1.viewmodel.StoryViewModel
 import com.ahmadfma.intermediate_submission1.viewmodel.ViewModelFactory
 
@@ -19,6 +22,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
     private lateinit var viewModel: StoryViewModel
+    private lateinit var storyAdapter: StoryAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentHomeBinding.inflate(inflater)
@@ -50,7 +54,7 @@ class HomeFragment : Fragment() {
                     val response = result.data
                     if(response != null) {
                         if(!response.error) {
-                            Log.d(TAG, "getStories: success : ${result.data.listStory}")
+                            setUi(response)
                         } else {
                             Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
                         }
@@ -60,6 +64,13 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun setUi(response: GetStoryResponse) = with(binding) {
+        storyAdapter = StoryAdapter(response.listStory)
+        rvStories.layoutManager = LinearLayoutManager(requireContext())
+        rvStories.setHasFixedSize(true)
+        rvStories.adapter = storyAdapter
     }
 
     private fun showLoading(isLoading: Boolean) = with(binding) {
