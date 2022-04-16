@@ -12,6 +12,7 @@ class UserPreferences(context: Context) {
         private const val USER_ID = "user id"
         private const val USER_NAME = "user name"
         private const val TAG = "UserPreferences"
+        var user = UserData()
     }
 
     private val preferences = context.getSharedPreferences(USER_PREF, Context.MODE_PRIVATE)
@@ -22,6 +23,7 @@ class UserPreferences(context: Context) {
         editor.putString(USER_ID, data.userId)
         editor.putString(USER_NAME, data.name)
         editor.apply()
+        user = data
         Log.d(TAG, "setUser: $data")
     }
 
@@ -30,6 +32,7 @@ class UserPreferences(context: Context) {
         data.name = preferences.getString(USER_NAME, "")
         data.token = preferences.getString(USER_TOKEN, "")
         data.userId = preferences.getString(USER_ID, "")
+        user = data
         Log.d(TAG, "getUser: $data")
         return data
     }

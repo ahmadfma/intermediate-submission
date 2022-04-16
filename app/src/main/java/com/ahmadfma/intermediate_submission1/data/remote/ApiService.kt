@@ -1,13 +1,12 @@
 package com.ahmadfma.intermediate_submission1.data.remote
 
+import com.ahmadfma.intermediate_submission1.data.local.UserPreferences
 import com.ahmadfma.intermediate_submission1.data.model.GetStoryResponse
 import com.ahmadfma.intermediate_submission1.data.model.LoginResponse
 import com.ahmadfma.intermediate_submission1.data.model.MessageResponse
 import retrofit2.Response
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
+
 
 interface ApiService {
 
@@ -27,6 +26,8 @@ interface ApiService {
     ): Response<LoginResponse>
 
     @GET("stories")
-    suspend fun getStories(): Response<GetStoryResponse>
+    suspend fun getStories(
+        @Header("Authorization") token : String = "Bearer " + UserPreferences.user.token
+    ): Response<GetStoryResponse>
 
 }
