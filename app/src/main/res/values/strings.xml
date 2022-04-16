@@ -16,4 +16,7 @@
     <string name="error_form_not_filled">Please fill all the form</string>
     <string name="error_form_not_valid">Please fill all the form with correct format</string>
     <string name="error">Something went error</string>
+    <string name="home">Home</string>
+    <string name="new_story">New Story</string>
+    <string name="profile">Profile</string>
 </resources>

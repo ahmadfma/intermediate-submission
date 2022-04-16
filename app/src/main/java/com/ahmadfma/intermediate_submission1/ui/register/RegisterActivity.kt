@@ -13,7 +13,7 @@ import com.ahmadfma.intermediate_submission1.data.local.UserPreferences
 import com.ahmadfma.intermediate_submission1.data.model.LoginResponse
 import com.ahmadfma.intermediate_submission1.databinding.ActivityRegisterBinding
 import com.ahmadfma.intermediate_submission1.helper.Validator
-import com.ahmadfma.intermediate_submission1.ui.list_story.ListStoryActivity
+import com.ahmadfma.intermediate_submission1.ui.main.MainActivity
 import com.ahmadfma.intermediate_submission1.viewmodel.AuthenticationViewModel
 import com.ahmadfma.intermediate_submission1.viewmodel.ViewModelFactory
 
@@ -104,7 +104,7 @@ class RegisterActivity : AppCompatActivity() {
                         if(!response.error) {
                             saveUserData(response)
                             Intent().apply {
-                                setClass(this@RegisterActivity, ListStoryActivity::class.java)
+                                setClass(this@RegisterActivity, MainActivity::class.java)
                                 startActivity(this)
                                 finish()
                             }
