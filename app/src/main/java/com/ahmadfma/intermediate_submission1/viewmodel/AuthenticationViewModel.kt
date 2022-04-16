@@ -7,4 +7,5 @@ class AuthenticationViewModel(private val authenticationRepository: Authenticati
 
     fun registerUser(username: String, email: String, password: String) = authenticationRepository.register(username, email, password)
 
+    fun loginUser(email: String, password: String) = authenticationRepository.login(email, password)
 }

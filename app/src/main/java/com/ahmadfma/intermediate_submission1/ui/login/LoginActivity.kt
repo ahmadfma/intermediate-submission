@@ -15,16 +15,21 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initVariable()
+        initListener()
+    }
 
-        with(binding) {
-            signUpBtnLogin.setOnClickListener {
-                Intent().apply {
-                    setClass(this@LoginActivity, RegisterActivity::class.java)
-                    startActivity(this)
-                }
+    private fun initVariable() {
+
+    }
+
+    private fun initListener() = with(binding) {
+        signUpBtnLogin.setOnClickListener {
+            Intent().apply {
+                setClass(this@LoginActivity, RegisterActivity::class.java)
+                startActivity(this)
             }
         }
-
     }
 
 
