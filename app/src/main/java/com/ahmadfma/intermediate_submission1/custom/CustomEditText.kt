@@ -20,6 +20,7 @@ class CustomEditText : AppCompatEditText, View.OnTouchListener {
 
     private lateinit var clearButtonImage: Drawable
     private lateinit var errorButtonImage: Drawable
+    private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
     constructor(context: Context) : super(context) {init()}
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {init()}
@@ -45,8 +46,15 @@ class CustomEditText : AppCompatEditText, View.OnTouchListener {
             when(hasFocus) {
                 true -> {}
                 false -> {
-                    if(inputType-1 == InputType.TYPE_TEXT_VARIATION_PASSWORD && text != null && text!!.length < 6) {
-                        error = context.getString(R.string.error_password)
+                    when(inputType-1) {
+                        InputType.TYPE_TEXT_VARIATION_PASSWORD -> {
+                            if(text != null && text!!.length < 6)
+                                error = context.getString(R.string.error_password)
+                        }
+                        InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS -> {
+                            if(!isEmailValid())
+                                error =context.getString(R.string.error_invalid_email)
+                        }
                     }
                 }
             }
@@ -56,6 +64,10 @@ class CustomEditText : AppCompatEditText, View.OnTouchListener {
 
     override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
         return false
+    }
+
+    private fun isEmailValid() : Boolean {
+       return this.text.toString().trim().matches(emailPattern.toRegex())
     }
 
     companion object {
