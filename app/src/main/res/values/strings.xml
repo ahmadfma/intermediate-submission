@@ -21,4 +21,5 @@
     <string name="profile">Profile</string>
     <string name="story_image">story image</string>
     <string name="user_icon">user icon</string>
+    <string name="setting">Setting</string>
 </resources>
