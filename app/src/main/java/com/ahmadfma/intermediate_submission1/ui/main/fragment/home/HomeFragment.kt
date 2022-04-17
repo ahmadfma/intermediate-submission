@@ -2,11 +2,10 @@ package com.ahmadfma.intermediate_submission1.ui.main.fragment.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.ViewModelProvider
@@ -23,15 +22,14 @@ import com.ahmadfma.intermediate_submission1.viewmodel.ViewModelFactory
 import androidx.core.util.Pair
 import com.ahmadfma.intermediate_submission1.databinding.ItemStoryBinding
 
-
 class HomeFragment : Fragment() {
-
     private lateinit var binding : FragmentHomeBinding
     private lateinit var viewModel: StoryViewModel
     private lateinit var storyAdapter: StoryAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentHomeBinding.inflate(inflater)
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -86,6 +84,16 @@ class HomeFragment : Fragment() {
                     }
                 }
             }
+        }
+
+        binding.homeToolbar.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.settingMenu -> {
+                    startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+                    return@setOnMenuItemClickListener  true
+                }
+            }
+            return@setOnMenuItemClickListener false
         }
     }
 
