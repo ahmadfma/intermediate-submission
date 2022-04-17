@@ -125,14 +125,14 @@ class AddStoryActivity : AppCompatActivity() {
     private val launcherIntentGallery = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == RESULT_OK) {
             val selectedImg: Uri = result.data?.data as Uri
-            selectedImageFile = FileHelper.uriToFile(selectedImg, this@AddStoryActivity)
+            selectedImageFile = FileHelper.reduceFileImage(FileHelper.uriToFile(selectedImg, this@AddStoryActivity))
             binding.storyImage.setImageURI(selectedImg)
         }
     }
 
     private val launcherIntentCamera = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it.resultCode == RESULT_OK) {
-            selectedImageFile = File(currentPhotoPath)
+            selectedImageFile = FileHelper.reduceFileImage(File(currentPhotoPath))
             if(selectedImageFile != null) {
                 val result =  BitmapFactory.decodeFile(selectedImageFile!!.path)
                 binding.storyImage.setImageBitmap(result)

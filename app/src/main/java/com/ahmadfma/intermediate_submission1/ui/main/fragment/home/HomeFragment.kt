@@ -67,6 +67,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUi(response: GetStoryResponse) = with(binding) {
+        Log.d(TAG, "setUi: $response")
         storyAdapter = StoryAdapter(response.listStory)
         rvStories.layoutManager = LinearLayoutManager(requireContext())
         rvStories.setHasFixedSize(true)
