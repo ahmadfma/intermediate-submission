@@ -32,7 +32,6 @@ class CustomEditText : AppCompatEditText, View.OnTouchListener {
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         textAlignment = View.TEXT_ALIGNMENT_VIEW_START
-        Log.d(TAG, "onDraw: $inputType")
         hint = when(inputType-1) {
             InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS -> context.getString(R.string.input_email)
             InputType.TYPE_TEXT_VARIATION_PASSWORD -> context.getString(R.string.input_password)
