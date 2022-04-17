@@ -22,4 +22,8 @@
     <string name="story_image">story image</string>
     <string name="user_icon">user icon</string>
     <string name="setting">Setting</string>
+    <string name="choose_from_gallery">Choose from gallery</string>
+    <string name="choose_from_camera">Choose from camera</string>
+    <string name="write_your_description">Write your description</string>
+    <string name="upload_button">Upload Button</string>
 </resources>

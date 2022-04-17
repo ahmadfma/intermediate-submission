@@ -1,9 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.add_story.AddStoryActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/addStoryAppbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/addStoryToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigationIcon="@drawable/ic_back"
+            app:title="@string/new_story" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/addStoryAppbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:orientation="vertical" >
+            <ImageView
+                android:id="@+id/storyImage"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/story_image"
+                android:scaleType="centerCrop"
+                android:src="@color/grey"
+                app:layout_constraintDimensionRatio="1x1"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/chooseFromGalleryBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/button_background"
+                android:drawableStart="@drawable/ic_add2"
+                android:drawablePadding="10dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="@string/choose_from_gallery"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/storyImage" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/button_background"
+                android:drawableStart="@drawable/ic_camera"
+                android:drawablePadding="10dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="@string/choose_from_camera"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/chooseFromGalleryBtn"
+                app:layout_constraintTop_toBottomOf="@+id/storyImage" />
+
+            <include
+                layout="@layout/description_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chooseFromGalleryBtn" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/uploadBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:backgroundTint="@color/red"
+        android:src="@drawable/ic_upload"
+        app:tint="@color/white"
+        android:layout_margin="15dp"
+        android:contentDescription="@string/upload_button" />
+
+</RelativeLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/stroke"
+    android:padding="10dp">
+
+    <EditText
+        android:id="@+id/descInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:background="@null"
+        android:hint="@string/write_your_description"
+        android:inputType="textMultiLine"
+        android:textSize="13sp" />
+
+</RelativeLayout>
