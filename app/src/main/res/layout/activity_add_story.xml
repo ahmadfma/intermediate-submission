@@ -34,17 +34,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
-            android:orientation="vertical" >
+            android:orientation="vertical">
+
             <ImageView
                 android:id="@+id/storyImage"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:adjustViewBounds="true"
+                android:background="@color/grey"
                 android:contentDescription="@string/story_image"
-                android:scaleType="centerCrop"
-                android:src="@color/grey"
-                app:layout_constraintDimensionRatio="1x1"
-                tools:ignore="MissingConstraints" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintDimensionRatio="1:1" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/chooseFromGalleryBtn"
@@ -64,6 +65,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/storyImage" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/chooseFromCameraBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_margin="10dp"
@@ -79,6 +81,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/storyImage" />
 
             <include
+                android:id="@+id/descLayout"
                 layout="@layout/description_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
