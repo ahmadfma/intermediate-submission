@@ -1,5 +1,6 @@
 package com.ahmadfma.intermediate_submission1.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
@@ -7,9 +8,9 @@ import com.ahmadfma.intermediate_submission1.data.remote.ApiService
 import com.ahmadfma.intermediate_submission1.data.Result
 import com.ahmadfma.intermediate_submission1.data.model.GetStoryResponse
 import com.ahmadfma.intermediate_submission1.data.model.MessageResponse
+import kotlinx.coroutines.delay
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import java.io.File
 
 class StoryRepository(private val apiService: ApiService) {
 
@@ -32,9 +33,11 @@ class StoryRepository(private val apiService: ApiService) {
             val returnValue = MutableLiveData<Result<MessageResponse?>>()
             val response = apiService.addNewStories(image = image, description = description)
             returnValue.value = Result.Success(response.body())
+            delay(1500)
             emitSource(returnValue)
         }
         catch (e: java.lang.Exception) {
+            Log.e("StoryRepo", "addStories: $e")
             emit(Result.Error(e.toString()))
         }
     }

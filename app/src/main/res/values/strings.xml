@@ -29,4 +29,6 @@
     <string name="choose_from_camera">Choose from camera</string>
     <string name="write_your_description">Write your description</string>
     <string name="upload_button">Upload Button</string>
+    <string name="uploading">Uploading</string>
+    <string name="add_story_success">Add story success</string>
 </resources>

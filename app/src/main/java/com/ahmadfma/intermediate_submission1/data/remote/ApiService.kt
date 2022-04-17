@@ -34,7 +34,7 @@ interface ApiService {
 
     @Multipart
     @POST("stories")
-    fun addNewStories(
+    suspend fun addNewStories(
         @Header("Authorization") token : String = "Bearer " + UserPreferences.user.token,
         @Part image: MultipartBody.Part,
         @Part("description") description: RequestBody,

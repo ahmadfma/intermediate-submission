@@ -8,6 +8,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -15,12 +16,20 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import com.ahmadfma.intermediate_submission1.R
+import com.ahmadfma.intermediate_submission1.custom.ProgressDialog
 import com.ahmadfma.intermediate_submission1.databinding.ActivityAddStoryBinding
 import com.ahmadfma.intermediate_submission1.helper.FileHelper
 import com.ahmadfma.intermediate_submission1.helper.Validator
 import com.ahmadfma.intermediate_submission1.viewmodel.StoryViewModel
 import com.ahmadfma.intermediate_submission1.viewmodel.ViewModelFactory
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import java.io.File
+import com.ahmadfma.intermediate_submission1.data.Result
 
 class AddStoryActivity : AppCompatActivity() {
 
@@ -28,7 +37,7 @@ class AddStoryActivity : AppCompatActivity() {
     private lateinit var viewModel: StoryViewModel
     private lateinit var currentPhotoPath: String
     private var selectedImageFile: File? = null
-    private var descInput = ""
+    private val progressDialog = ProgressDialog(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +79,42 @@ class AddStoryActivity : AppCompatActivity() {
 
         if(isValid) {
             Toast.makeText(this@AddStoryActivity, "VALID", Toast.LENGTH_SHORT).show()
+            val description = descLayout.descInput.text.toString().toRequestBody("text/plain".toMediaType())
+            val requestImageFile = selectedImageFile!!.asRequestBody("image/jpeg".toMediaTypeOrNull())
+            val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
+                "photo",
+                selectedImageFile!!.name,
+                requestImageFile
+            )
+            uploadListener(imageMultipart, description)
+        }
+    }
+
+    private fun uploadListener(imageMultipart: MultipartBody.Part, description: RequestBody) {
+        viewModel.addNewStories(imageMultipart, description).observe(this) { result ->
+            when(result) {
+                is Result.Loading -> {
+                    progressDialog.startLoadingDialog()
+                }
+                is Result.Error -> {
+                    progressDialog.dismissDialog()
+                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                }
+                is Result.Success -> {
+                    progressDialog.dismissDialog()
+                    val response = result.data
+                    if (response != null) {
+                        if (!response.error) {
+                            Toast.makeText(this, getString(R.string.add_story_success), Toast.LENGTH_SHORT).show()
+                            finish()
+                        } else {
+                            Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
     }
 
@@ -145,6 +190,7 @@ class AddStoryActivity : AppCompatActivity() {
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
+        private const val TAG = "AddStoryActivity"
     }
 
 }
