@@ -27,7 +27,7 @@
            android:id="@+id/userIcon"
            android:layout_width="25dp"
            android:layout_height="25dp"
-           android:src="@drawable/ic_user"
+           android:src="@drawable/ic_person"
            android:layout_marginStart="10dp"
            android:layout_marginTop="10dp"
            app:layout_constraintStart_toStartOf="parent"
