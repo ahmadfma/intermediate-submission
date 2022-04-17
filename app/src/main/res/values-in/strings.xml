@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Intermediate_Submission1</string>
+    <string name="icon">icon</string>
+    <string name="story">Cerita</string>
+    <string name="input_email">Email</string>
+    <string name="input_password">Password</string>
+    <string name="input">Username</string>
+    <string name="description">Tulis deskripsi anda</string>
+    <string name="error_password">Password minimal memiliki 6 karakter</string>
+    <string name="error_invalid_email">Format email salah</string>
+    <string name="sign_in">Masuk</string>
+    <string name="akun">Belum punya akun ?</string>
+    <string name="hasakun">Sudah punya akun ?</string>
+    <string name="sign_up">Daftar</string>
+    <string name="masukkan_username">Masukkan Username</string>
+    <string name="error_form_not_filled">Harap mengisi semua form</string>
+    <string name="error_description">Harap mengisi deskripsi</string>
+    <string name="error_select_image">Harap memilih gambar</string>
+    <string name="error_form_not_valid">Harap mengisi semua form dengan format yang benar</string>
+    <string name="error">Terdapat kesalahan</string>
+    <string name="home">Beranda</string>
+    <string name="new_story">Cerita Baru</string>
+    <string name="profile">Profil</string>
+    <string name="story_image">story image</string>
+    <string name="user_icon">Icon Pengguna</string>
+    <string name="setting">Pengaturan</string>
+    <string name="choose_from_gallery">Pilih dari galeri</string>
+    <string name="choose_from_camera">Pilih dari kamera</string>
+    <string name="upload_button">Tombol unggah</string>
+    <string name="uploading">Mengunggah</string>
+    <string name="add_story_success">Tambah cerita berhasil</string>
+    <string name="choose_picture">"Pilih sebuah gambar"</string>
+    <string name="logout">Keluar</string>
+    <string name="detail">Detail</string>
+    <string name="transition_image">image</string>
+    <string name="transition_username">username</string>
+    <string name="transition_description">description</string>
+    <string name="transition_date">date</string>
+</resources>

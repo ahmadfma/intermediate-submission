@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">Intermediate_Submission1</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="icon">icon</string>
+    <string name="story">Story</string>
     <string name="input_email">Email</string>
     <string name="input_password">Password</string>
     <string name="input">Username</string>
@@ -27,15 +26,14 @@
     <string name="setting">Setting</string>
     <string name="choose_from_gallery">Choose from gallery</string>
     <string name="choose_from_camera">Choose from camera</string>
-    <string name="write_your_description">Write your description</string>
     <string name="upload_button">Upload Button</string>
     <string name="uploading">Uploading</string>
     <string name="add_story_success">Add story success</string>
     <string name="choose_picture">"Choose a Picture"</string>
     <string name="logout">Logout</string>
     <string name="detail">Detail</string>
-    <string name="transition_image">image</string>
-    <string name="transition_username">username</string>
-    <string name="transition_description">description</string>
-    <string name="transition_date">date</string>
+    <string name="transition_image" translatable="false">image</string>
+    <string name="transition_username" translatable="false">username</string>
+    <string name="transition_description" translatable="false">description</string>
+    <string name="transition_date" translatable="false">date</string>
 </resources>
