@@ -1,20 +1,16 @@
 package com.ahmadfma.intermediate_submission1.ui.main
 
 import android.content.Intent
-import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.ahmadfma.intermediate_submission1.R
 import com.ahmadfma.intermediate_submission1.databinding.ActivityMainBinding
-import com.ahmadfma.intermediate_submission1.helper.FileHelper
 import com.ahmadfma.intermediate_submission1.ui.add_story.AddStoryActivity
 import com.ahmadfma.intermediate_submission1.ui.main.fragment.home.HomeFragment
 import com.ahmadfma.intermediate_submission1.ui.main.fragment.profile.ProfileFragment
-import java.io.File
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

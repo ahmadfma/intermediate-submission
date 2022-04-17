@@ -31,4 +31,6 @@
     <string name="upload_button">Upload Button</string>
     <string name="uploading">Uploading</string>
     <string name="add_story_success">Add story success</string>
+    <string name="choose_picture">"Choose a Picture"</string>
+    <string name="logout">Logout</string>
 </resources>

@@ -130,7 +130,7 @@ class AddStoryActivity : AppCompatActivity() {
             FileHelper.createTempFile(application).also {
                 val photoURI: Uri = FileProvider.getUriForFile(
                     this@AddStoryActivity,
-                    "com.ahmadfma.intermediate_submission1",
+                    AUTHOR,
                     it
                 )
                 currentPhotoPath = it.absolutePath
@@ -144,7 +144,7 @@ class AddStoryActivity : AppCompatActivity() {
         val intent = Intent()
         intent.action = Intent.ACTION_GET_CONTENT
         intent.type = "image/*"
-        val chooser = Intent.createChooser(intent, "Choose a Picture")
+        val chooser = Intent.createChooser(intent, getString(R.string.choose_picture))
         launcherIntentGallery.launch(chooser)
     }
 
@@ -188,7 +188,7 @@ class AddStoryActivity : AppCompatActivity() {
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
-        private const val RESULT_CODE = 89
+        private const val AUTHOR = "com.ahmadfma.intermediate_submission1"
     }
 
 }
