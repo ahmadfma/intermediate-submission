@@ -8,7 +8,6 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -78,7 +77,6 @@ class AddStoryActivity : AppCompatActivity() {
         }
 
         if(isValid) {
-            Toast.makeText(this@AddStoryActivity, "VALID", Toast.LENGTH_SHORT).show()
             val description = descLayout.descInput.text.toString().toRequestBody("text/plain".toMediaType())
             val requestImageFile = selectedImageFile!!.asRequestBody("image/jpeg".toMediaTypeOrNull())
             val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
@@ -105,7 +103,7 @@ class AddStoryActivity : AppCompatActivity() {
                     val response = result.data
                     if (response != null) {
                         if (!response.error) {
-                            Toast.makeText(this, getString(R.string.add_story_success), Toast.LENGTH_SHORT).show()
+                            setResult(RESULT_OK)
                             finish()
                         } else {
                             Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
@@ -190,7 +188,7 @@ class AddStoryActivity : AppCompatActivity() {
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
-        private const val TAG = "AddStoryActivity"
+        private const val RESULT_CODE = 89
     }
 
 }
