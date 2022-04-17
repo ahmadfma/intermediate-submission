@@ -17,8 +17,6 @@ import com.ahmadfma.intermediate_submission1.R
 import com.google.android.material.textfield.TextInputEditText
 
 class CustomEditText : AppCompatEditText, View.OnTouchListener {
-
-    private lateinit var clearButtonImage: Drawable
     private lateinit var errorButtonImage: Drawable
     private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
@@ -27,7 +25,6 @@ class CustomEditText : AppCompatEditText, View.OnTouchListener {
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {init()}
 
     private fun init() {
-        clearButtonImage = ContextCompat.getDrawable(context, R.drawable.ic_close) as Drawable
         errorButtonImage = ContextCompat.getDrawable(context, R.drawable.ic_error) as Drawable
         setOnTouchListener(this)
     }
@@ -35,10 +32,11 @@ class CustomEditText : AppCompatEditText, View.OnTouchListener {
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         textAlignment = View.TEXT_ALIGNMENT_VIEW_START
-
+        Log.d(TAG, "onDraw: $inputType")
         hint = when(inputType-1) {
             InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS -> context.getString(R.string.input_email)
             InputType.TYPE_TEXT_VARIATION_PASSWORD -> context.getString(R.string.input_password)
+            InputType.TYPE_TEXT_FLAG_MULTI_LINE -> context.getString(R.string.description)
             else -> context.getString(R.string.input)
         }
 
@@ -53,7 +51,12 @@ class CustomEditText : AppCompatEditText, View.OnTouchListener {
                         }
                         InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS -> {
                             if(!isEmailValid())
-                                error =context.getString(R.string.error_invalid_email)
+                                error = context.getString(R.string.error_invalid_email)
+                        }
+                        InputType.TYPE_TEXT_FLAG_MULTI_LINE -> {
+                            if(text != null && text!!.isEmpty()) {
+                                error = context.getString(R.string.error_description)
+                            }
                         }
                     }
                 }

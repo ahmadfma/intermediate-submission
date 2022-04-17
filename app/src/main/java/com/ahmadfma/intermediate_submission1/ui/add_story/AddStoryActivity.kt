@@ -14,8 +14,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
+import com.ahmadfma.intermediate_submission1.R
 import com.ahmadfma.intermediate_submission1.databinding.ActivityAddStoryBinding
 import com.ahmadfma.intermediate_submission1.helper.FileHelper
+import com.ahmadfma.intermediate_submission1.helper.Validator
 import com.ahmadfma.intermediate_submission1.viewmodel.StoryViewModel
 import com.ahmadfma.intermediate_submission1.viewmodel.ViewModelFactory
 import java.io.File
@@ -26,6 +28,7 @@ class AddStoryActivity : AppCompatActivity() {
     private lateinit var viewModel: StoryViewModel
     private lateinit var currentPhotoPath: String
     private var selectedImageFile: File? = null
+    private var descInput = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +51,25 @@ class AddStoryActivity : AppCompatActivity() {
         }
         chooseFromCameraBtn.setOnClickListener {
             startIntentCamera()
+        }
+        uploadBtn.setOnClickListener {
+            checkInputs()
+        }
+    }
+
+    private fun checkInputs() = with(binding) {
+        var isValid = false
+        descLayout.descInput.clearFocus()
+        if(selectedImageFile == null) {
+            Toast.makeText(this@AddStoryActivity, getString(R.string.error_select_image), Toast.LENGTH_SHORT).show()
+        } else if(!Validator.isAllFormFilled(arrayOf(descLayout.descInput))) {
+            Toast.makeText(this@AddStoryActivity, getString(R.string.error_form_not_filled), Toast.LENGTH_SHORT).show()
+        } else  {
+            isValid = true
+        }
+
+        if(isValid) {
+            Toast.makeText(this@AddStoryActivity, "VALID", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -110,9 +132,13 @@ class AddStoryActivity : AppCompatActivity() {
 
     private val launcherIntentCamera = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it.resultCode == RESULT_OK) {
-            val myFile = File(currentPhotoPath)
-            val result =  BitmapFactory.decodeFile(myFile.path)
-            binding.storyImage.setImageBitmap(result)
+            selectedImageFile = File(currentPhotoPath)
+            if(selectedImageFile != null) {
+                val result =  BitmapFactory.decodeFile(selectedImageFile!!.path)
+                binding.storyImage.setImageBitmap(result)
+            } else {
+                Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
