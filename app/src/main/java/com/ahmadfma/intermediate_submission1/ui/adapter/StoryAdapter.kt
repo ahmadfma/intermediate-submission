@@ -1,20 +1,23 @@
 package com.ahmadfma.intermediate_submission1.ui.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
 import com.ahmadfma.intermediate_submission1.R
 import com.ahmadfma.intermediate_submission1.data.model.ListStoryItem
 import com.ahmadfma.intermediate_submission1.databinding.ItemStoryBinding
 import com.bumptech.glide.Glide
 
-class StoryAdapter(private val stories : List<ListStoryItem>): RecyclerView.Adapter<StoryAdapter.Holder>() {
+class StoryAdapter: ListAdapter<ListStoryItem, StoryAdapter.Holder>(DIFF_CALLBACK) {
 
     private lateinit var context: Context
+    private lateinit var onItemClickListener: OnItemClickListener
 
-    inner class Holder(private val binding: ItemStoryBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class Holder(private val binding: ItemStoryBinding, private val onItemClickListener: OnItemClickListener): RecyclerView.ViewHolder(binding.root) {
         fun bind(storyItem: ListStoryItem) = with(binding){
             Glide.with(context)
                 .load(storyItem.photoUrl)
@@ -23,18 +26,44 @@ class StoryAdapter(private val stories : List<ListStoryItem>): RecyclerView.Adap
             storyDate.text = storyItem.createdAt
             storyDesc.text = storyItem.description
             storyUsername.text = storyItem.name
+
+            root.setOnClickListener {
+                onItemClickListener.onItemClick(storyItem, this)
+            }
+
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         context = parent.context
         val binding = ItemStoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return Holder(binding)
+        return Holder(binding, onItemClickListener)
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.bind(stories[position])
+        holder.bind(getItem(position))
     }
 
-    override fun getItemCount(): Int = stories.size
+    fun setListener(onItemClickListener: OnItemClickListener) {
+        this.onItemClickListener = onItemClickListener
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(listStoryItem: ListStoryItem, storyBinding: ItemStoryBinding)
+    }
+
+    companion object {
+        val DIFF_CALLBACK: DiffUtil.ItemCallback<ListStoryItem> =
+            object : DiffUtil.ItemCallback<ListStoryItem>() {
+                override fun areItemsTheSame(oldStory: ListStoryItem, newStory: ListStoryItem): Boolean {
+                    return oldStory.photoUrl == newStory.photoUrl
+                }
+
+                @SuppressLint("DiffUtilEquals")
+                override fun areContentsTheSame(oldStory: ListStoryItem, newStory: ListStoryItem): Boolean {
+                    return oldStory == newStory
+                }
+            }
+    }
+
 }

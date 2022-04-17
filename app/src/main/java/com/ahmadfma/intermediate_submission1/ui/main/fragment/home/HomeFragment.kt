@@ -1,5 +1,6 @@
 package com.ahmadfma.intermediate_submission1.ui.main.fragment.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,15 +8,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ahmadfma.intermediate_submission1.R
 import com.ahmadfma.intermediate_submission1.data.Result
 import com.ahmadfma.intermediate_submission1.data.model.GetStoryResponse
+import com.ahmadfma.intermediate_submission1.data.model.ListStoryItem
 import com.ahmadfma.intermediate_submission1.databinding.FragmentHomeBinding
 import com.ahmadfma.intermediate_submission1.ui.adapter.StoryAdapter
+import com.ahmadfma.intermediate_submission1.ui.detail.DetailActivity
 import com.ahmadfma.intermediate_submission1.viewmodel.StoryViewModel
 import com.ahmadfma.intermediate_submission1.viewmodel.ViewModelFactory
+import androidx.core.util.Pair
+import com.ahmadfma.intermediate_submission1.databinding.ItemStoryBinding
 
 
 class HomeFragment : Fragment() {
@@ -37,9 +43,26 @@ class HomeFragment : Fragment() {
 
     private fun initVariable() {
         viewModel = ViewModelProvider(requireActivity(), ViewModelFactory.getInstance())[StoryViewModel::class.java]
+        storyAdapter = StoryAdapter()
     }
 
     private fun initListener() {
+        storyAdapter.setListener(object : StoryAdapter.OnItemClickListener {
+            override fun onItemClick(listStoryItem: ListStoryItem, storyBinding: ItemStoryBinding) {
+                val intent = Intent(requireActivity(), DetailActivity::class.java)
+                val optionsCompat: ActivityOptionsCompat =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        requireActivity(),
+                        Pair(storyBinding.storyImage, getString(R.string.transition_image)),
+                        Pair(storyBinding.storyUsername, getString(R.string.transition_username)),
+                        Pair(storyBinding.storyDesc, getString(R.string.transition_description)),
+                        Pair(storyBinding.storyDate, getString(R.string.transition_date)),
+                    )
+                intent.putExtra(DetailActivity.EXTRA_STORY, listStoryItem)
+                startActivity(intent, optionsCompat.toBundle())
+            }
+        })
+
         viewModel.getStories().observe(viewLifecycleOwner) { result ->
             when(result) {
                 is Result.Error -> {
@@ -68,7 +91,7 @@ class HomeFragment : Fragment() {
 
     private fun setUi(response: GetStoryResponse) = with(binding) {
         Log.d(TAG, "setUi: $response")
-        storyAdapter = StoryAdapter(response.listStory)
+        storyAdapter.submitList(response.listStory)
         rvStories.layoutManager = LinearLayoutManager(requireContext())
         rvStories.setHasFixedSize(true)
         rvStories.adapter = storyAdapter

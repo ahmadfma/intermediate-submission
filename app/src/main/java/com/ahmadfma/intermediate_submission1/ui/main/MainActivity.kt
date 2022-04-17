@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         if (it.resultCode == RESULT_OK) {
             Toast.makeText(this, getString(R.string.add_story_success), Toast.LENGTH_SHORT).show()
             setCurrentFragment(HomeFragment())
+            binding.bottomAppbarMain.selectedItemId = R.id.nav_home
         }
     }
 

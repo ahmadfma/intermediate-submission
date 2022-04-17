@@ -52,6 +52,7 @@
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            tools:text="description"
+           android:textColor="@color/black2"
            android:textStyle="bold"
            app:layout_constraintStart_toStartOf="parent"
            android:layout_margin="10dp"
