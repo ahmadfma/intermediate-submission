@@ -128,16 +128,16 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun showProgressBar(isLoading: Boolean) = with(binding) {
         if(isLoading) {
-            binding.registerProgressBar.visibility = View.VISIBLE
-            binding.signUpBtn.visibility = View.GONE
+            registerProgressBar.visibility = View.VISIBLE
+            signUpBtn.visibility = View.GONE
         } else {
-            binding.registerProgressBar.visibility = View.GONE
-            binding.signUpBtn.visibility = View.VISIBLE
+            registerProgressBar.visibility = View.GONE
+            signUpBtn.visibility = View.VISIBLE
         }
     }
 
     companion object {
-        const val TAG = "RegisterActivity"
+        private const val TAG = "RegisterActivity"
     }
 
 }

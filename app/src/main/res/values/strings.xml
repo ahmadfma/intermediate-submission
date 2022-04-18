@@ -12,7 +12,6 @@
     <string name="akun">don\'t have an account ?</string>
     <string name="hasakun">already have an account ?</string>
     <string name="sign_up">Sign Up</string>
-    <string name="masukkan_username">Input Username</string>
     <string name="error_form_not_filled">Please fill all the form</string>
     <string name="error_description">Please fill the description</string>
     <string name="error_select_image">Please select an image</string>

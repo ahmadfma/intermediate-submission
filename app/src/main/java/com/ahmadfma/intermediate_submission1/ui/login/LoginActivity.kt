@@ -103,16 +103,16 @@ class LoginActivity : AppCompatActivity() {
 
     private fun showProgressBar(isLoading: Boolean) = with(binding) {
         if(isLoading) {
-            binding.loginProgressBar.visibility = View.VISIBLE
-            binding.signInBtn.visibility = View.GONE
+            loginProgressBar.visibility = View.VISIBLE
+            signInBtn.visibility = View.GONE
         } else {
-            binding.loginProgressBar.visibility = View.GONE
-            binding.signInBtn.visibility = View.VISIBLE
+            loginProgressBar.visibility = View.GONE
+            signInBtn.visibility = View.VISIBLE
         }
     }
 
     companion object {
-        const val TAG = "LoginActivity"
+        private const val TAG = "LoginActivity"
     }
 
 }

@@ -101,12 +101,16 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUi(response: GetStoryResponse) = with(binding) {
-        Log.d(TAG, "setUi: $response")
-        storyAdapter.submitList(response.listStory)
-        rvStories.layoutManager = LinearLayoutManager(requireContext())
-        rvStories.setHasFixedSize(true)
-        rvStories.adapter = storyAdapter
-        updateStackWidget(response)
+        if(response.listStory.isNotEmpty()) {
+            Log.d(TAG, "setUi: $response")
+            storyAdapter.submitList(response.listStory)
+            rvStories.layoutManager = LinearLayoutManager(requireContext())
+            rvStories.setHasFixedSize(true)
+            rvStories.adapter = storyAdapter
+            updateStackWidget(response)
+        } else {
+            Toast.makeText(requireContext(), getString(R.string.empty), Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun updateStackWidget(response: GetStoryResponse) {
