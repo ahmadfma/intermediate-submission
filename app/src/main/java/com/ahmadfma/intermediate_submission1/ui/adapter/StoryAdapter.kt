@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ahmadfma.intermediate_submission1.R
 import com.ahmadfma.intermediate_submission1.data.model.ListStoryItem
 import com.ahmadfma.intermediate_submission1.databinding.ItemStoryBinding
+import com.ahmadfma.intermediate_submission1.helper.convertToDate
 import com.bumptech.glide.Glide
 
 class StoryAdapter: ListAdapter<ListStoryItem, StoryAdapter.Holder>(DIFF_CALLBACK) {
@@ -23,7 +24,7 @@ class StoryAdapter: ListAdapter<ListStoryItem, StoryAdapter.Holder>(DIFF_CALLBAC
                 .load(storyItem.photoUrl)
                 .placeholder(R.color.grey)
                 .into(storyImage)
-            storyDate.text = storyItem.createdAt
+            storyDate.text = context.getString(R.string.upload, storyItem.createdAt?.convertToDate())
             storyDesc.text = storyItem.description
             storyUsername.text = storyItem.name
 

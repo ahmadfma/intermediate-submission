@@ -33,6 +33,7 @@
     <string name="logout">Logout</string>
     <string name="detail">Detail</string>
     <string name="empty">No data</string>
+    <string name="upload">Uploaded on %1$s</string>
     <string name="transition_image" translatable="false">image</string>
     <string name="transition_username" translatable="false">username</string>
     <string name="transition_description" translatable="false">description</string>

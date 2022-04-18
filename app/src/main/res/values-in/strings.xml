@@ -34,6 +34,7 @@
     <string name="logout">Keluar</string>
     <string name="detail">Detail</string>
     <string name="empty">Tidak ada data</string>
+    <string name="upload">Diunggah pada %1$s</string>
     <string name="transition_image">image</string>
     <string name="transition_username">username</string>
     <string name="transition_description">description</string>
