@@ -1,5 +1,7 @@
 package com.ahmadfma.intermediate_submission1.ui.main.fragment.home
 
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
@@ -21,6 +23,7 @@ import com.ahmadfma.intermediate_submission1.viewmodel.StoryViewModel
 import com.ahmadfma.intermediate_submission1.viewmodel.ViewModelFactory
 import androidx.core.util.Pair
 import com.ahmadfma.intermediate_submission1.databinding.ItemStoryBinding
+import com.ahmadfma.intermediate_submission1.widgets.ImageBannerWidget
 
 class HomeFragment : Fragment() {
     private lateinit var binding : FragmentHomeBinding
@@ -103,6 +106,16 @@ class HomeFragment : Fragment() {
         rvStories.layoutManager = LinearLayoutManager(requireContext())
         rvStories.setHasFixedSize(true)
         rvStories.adapter = storyAdapter
+        updateStackWidget(response)
+    }
+
+    private fun updateStackWidget(response: GetStoryResponse) {
+        val intent = Intent(requireContext(), ImageBannerWidget::class.java)
+        intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+        val ids = AppWidgetManager.getInstance(requireContext().applicationContext).getAppWidgetIds(ComponentName(requireContext(), ImageBannerWidget::class.java))
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
+        intent.putExtra(ImageBannerWidget.EXTRA_ITEM, response)
+        requireActivity().sendBroadcast(intent)
     }
 
     private fun showLoading(isLoading: Boolean) = with(binding) {
