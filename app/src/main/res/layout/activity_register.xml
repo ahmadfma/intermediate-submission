@@ -14,7 +14,7 @@
         android:layout_marginTop="36dp"
         android:layout_marginEnd="25dp"
         android:contentDescription="@string/icon"
-        android:src="@drawable/talk"
+        tools:src="@drawable/talk"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -125,7 +125,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
         android:layout_marginBottom="15dp"
-        android:text="@string/hasakun"
+        android:text="@string/has_account"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"

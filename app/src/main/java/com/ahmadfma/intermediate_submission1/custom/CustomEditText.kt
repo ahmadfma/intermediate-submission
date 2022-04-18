@@ -3,18 +3,13 @@ package com.ahmadfma.intermediate_submission1.custom
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
-import android.text.Editable
 import android.text.InputType
-import android.text.TextWatcher
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.widget.EditText
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import com.ahmadfma.intermediate_submission1.R
-import com.google.android.material.textfield.TextInputEditText
 
 class CustomEditText : AppCompatEditText, View.OnTouchListener {
     private lateinit var errorButtonImage: Drawable
@@ -53,9 +48,8 @@ class CustomEditText : AppCompatEditText, View.OnTouchListener {
                                 error = context.getString(R.string.error_invalid_email)
                         }
                         InputType.TYPE_TEXT_FLAG_MULTI_LINE -> {
-                            if(text != null && text!!.isEmpty()) {
+                            if(text != null && text!!.isEmpty())
                                 error = context.getString(R.string.error_description)
-                            }
                         }
                     }
                 }
@@ -69,11 +63,7 @@ class CustomEditText : AppCompatEditText, View.OnTouchListener {
     }
 
     private fun isEmailValid() : Boolean {
-       return this.text.toString().matches(emailPattern.toRegex())
-    }
-
-    companion object {
-        const val TAG = "CustomEditText"
+       return text.toString().matches(emailPattern.toRegex())
     }
 
 }

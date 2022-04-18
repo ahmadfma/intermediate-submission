@@ -3,7 +3,6 @@ package com.ahmadfma.intermediate_submission1.ui.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -74,7 +73,6 @@ class LoginActivity : AppCompatActivity() {
                 is Result.Success -> {
                     showProgressBar(false)
                     val response = result.data
-                    Log.d(TAG, "Result Success: response : $response")
                     if (response != null) {
                         if (!response.error) {
                             saveUserData(response)
@@ -109,10 +107,6 @@ class LoginActivity : AppCompatActivity() {
             loginProgressBar.visibility = View.GONE
             signInBtn.visibility = View.VISIBLE
         }
-    }
-
-    companion object {
-        private const val TAG = "LoginActivity"
     }
 
 }

@@ -16,7 +16,7 @@
            android:id="@+id/storyImage"
            android:layout_width="match_parent"
            android:layout_height="0dp"
-           android:src="@drawable/talk"
+           tools:src="@drawable/talk"
            android:adjustViewBounds="true"
            android:scaleType="centerCrop"
            app:layout_constraintDimensionRatio="1x1"
@@ -45,7 +45,7 @@
            app:layout_constraintBottom_toBottomOf="@+id/userIcon"
            app:layout_constraintStart_toEndOf="@+id/userIcon"
            app:layout_constraintTop_toTopOf="@+id/userIcon"
-           tools:text="Ahmad Fathanah" />
+           tools:text="Ahmad" />
 
        <TextView
            android:id="@+id/storyDesc"

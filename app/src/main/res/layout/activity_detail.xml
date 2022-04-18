@@ -34,7 +34,7 @@
                 android:id="@+id/storyImage"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:src="@drawable/talk"
+                tools:src="@drawable/talk"
                 android:adjustViewBounds="true"
                 app:layout_constraintDimensionRatio="1x1"
                 tools:ignore="MissingConstraints"
@@ -52,7 +52,7 @@
                 android:transitionName="@string/transition_username"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/storyImage"
-                tools:text="Ahmad Fathanah" />
+                tools:text="Ahmad" />
 
             <TextView
                 android:id="@+id/storyDesc"

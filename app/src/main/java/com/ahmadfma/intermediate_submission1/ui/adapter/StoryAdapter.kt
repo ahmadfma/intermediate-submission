@@ -54,17 +54,16 @@ class StoryAdapter: ListAdapter<ListStoryItem, StoryAdapter.Holder>(DIFF_CALLBAC
     }
 
     companion object {
-        val DIFF_CALLBACK: DiffUtil.ItemCallback<ListStoryItem> =
-            object : DiffUtil.ItemCallback<ListStoryItem>() {
-                override fun areItemsTheSame(oldStory: ListStoryItem, newStory: ListStoryItem): Boolean {
-                    return oldStory.photoUrl == newStory.photoUrl
-                }
-
-                @SuppressLint("DiffUtilEquals")
-                override fun areContentsTheSame(oldStory: ListStoryItem, newStory: ListStoryItem): Boolean {
-                    return oldStory == newStory
-                }
+        private val DIFF_CALLBACK: DiffUtil.ItemCallback<ListStoryItem> = object : DiffUtil.ItemCallback<ListStoryItem>() {
+            override fun areItemsTheSame(oldStory: ListStoryItem, newStory: ListStoryItem): Boolean {
+                return oldStory.photoUrl == newStory.photoUrl
             }
+
+            @SuppressLint("DiffUtilEquals")
+            override fun areContentsTheSame(oldStory: ListStoryItem, newStory: ListStoryItem): Boolean {
+                return oldStory == newStory
+            }
+        }
     }
 
 }

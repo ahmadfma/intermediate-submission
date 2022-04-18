@@ -5,7 +5,6 @@ import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
@@ -63,8 +62,8 @@ class HomeFragment : Fragment() {
         viewModel.getStories().observe(viewLifecycleOwner) { result ->
             when(result) {
                 is Result.Error -> {
-                    Log.e(TAG, "getStories: error : ${result.error}")
                     showLoading(false)
+                    Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
                 }
                 is Result.Loading -> {
                     showLoading(true)
@@ -98,7 +97,6 @@ class HomeFragment : Fragment() {
 
     private fun setUi(response: GetStoryResponse) = with(binding) {
         if(response.listStory.isNotEmpty()) {
-            Log.d(TAG, "setUi: $response")
             storyAdapter.submitList(response.listStory)
             rvStories.layoutManager = LinearLayoutManager(requireContext())
             rvStories.setHasFixedSize(true)
@@ -129,10 +127,6 @@ class HomeFragment : Fragment() {
                 rvStories.visibility = View.VISIBLE
             }
         }
-    }
-
-    companion object {
-        private const val TAG = "HomeFragment"
     }
 
 }

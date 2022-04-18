@@ -118,21 +118,12 @@ class AddStoryActivity : AppCompatActivity() {
 
     private fun startIntentCamera() {
         if (!allPermissionsGranted()) {
-            ActivityCompat.requestPermissions(
-                this,
-                REQUIRED_PERMISSIONS,
-                REQUEST_CODE_PERMISSIONS
-            )
+            ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
         } else {
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             intent.resolveActivity(packageManager)
-
             FileHelper.createTempFile(application).also {
-                val photoURI: Uri = FileProvider.getUriForFile(
-                    this@AddStoryActivity,
-                    AUTHOR,
-                    it
-                )
+                val photoURI: Uri = FileProvider.getUriForFile(this@AddStoryActivity, AUTHOR, it)
                 currentPhotoPath = it.absolutePath
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                 launcherIntentCamera.launch(intent)
@@ -152,11 +143,7 @@ class AddStoryActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (!allPermissionsGranted()) {
-                Toast.makeText(
-                    this,
-                    "Tidak mendapatkan permission.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this, getString(R.string.no_permission), Toast.LENGTH_SHORT).show()
             }
         }
     }

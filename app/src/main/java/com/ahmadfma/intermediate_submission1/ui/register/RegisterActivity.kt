@@ -3,7 +3,6 @@ package com.ahmadfma.intermediate_submission1.ui.register
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -62,7 +61,6 @@ class RegisterActivity : AppCompatActivity() {
         viewModel.registerUser(usernameInput, emailInput, passwordInput).observe(this) { result ->
             when(result) {
                 is Result.Loading -> {
-                    Log.d(TAG, "Result Loading")
                     showProgressBar(true)
                 }
                 is Result.Error -> {
@@ -74,7 +72,6 @@ class RegisterActivity : AppCompatActivity() {
                     val message = result.data
                     if(message != null) {
                         if(message.error) {
-                            Log.d(TAG, "Result Success: error : ${message.message}")
                             Toast.makeText(this, message.message, Toast.LENGTH_SHORT).show()
                         } else {
                             loginUserListener()
@@ -98,7 +95,6 @@ class RegisterActivity : AppCompatActivity() {
                     showProgressBar(true)
                 }
                 is Result.Success -> {
-                    Log.d(TAG, "Result Success: ${result.data}")
                     val response = result.data
                     if(response != null) {
                         if(!response.error) {
@@ -134,10 +130,6 @@ class RegisterActivity : AppCompatActivity() {
             registerProgressBar.visibility = View.GONE
             signUpBtn.visibility = View.VISIBLE
         }
-    }
-
-    companion object {
-        private const val TAG = "RegisterActivity"
     }
 
 }

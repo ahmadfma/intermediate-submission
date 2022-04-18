@@ -1,6 +1,5 @@
 package com.ahmadfma.intermediate_submission1.data.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
@@ -37,7 +36,6 @@ class StoryRepository(private val apiService: ApiService) {
             emitSource(returnValue)
         }
         catch (e: java.lang.Exception) {
-            Log.e("StoryRepo", "addStories: $e")
             emit(Result.Error(e.toString()))
         }
     }

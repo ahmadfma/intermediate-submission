@@ -6,7 +6,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class GetStoryResponse(
-
 	@field:SerializedName("listStory")
 	val listStory: List<ListStoryItem>,
 
@@ -19,7 +18,6 @@ data class GetStoryResponse(
 
 @Parcelize
 data class ListStoryItem(
-
 	@field:SerializedName("photoUrl")
 	val photoUrl: String? = null,
 
@@ -31,13 +29,4 @@ data class ListStoryItem(
 
 	@field:SerializedName("description")
 	val description: String? = null,
-
-	@field:SerializedName("lon")
-	val lon: Double? = null,
-
-	@field:SerializedName("id")
-	val id: String? = null,
-
-	@field:SerializedName("lat")
-	val lat: Double? = null
 ) : Parcelable

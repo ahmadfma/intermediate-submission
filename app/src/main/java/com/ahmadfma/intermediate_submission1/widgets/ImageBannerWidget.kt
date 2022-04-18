@@ -53,7 +53,5 @@ class ImageBannerWidget : AppWidgetProvider() {
 
     override fun onEnabled(context: Context) {}
 
-    override fun onDisabled(context: Context) {
-        // Enter relevant functionality for when the last widget is disabled
-    }
+    override fun onDisabled(context: Context) {}
 }

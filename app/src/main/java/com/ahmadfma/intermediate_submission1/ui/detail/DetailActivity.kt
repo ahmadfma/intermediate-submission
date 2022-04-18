@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.ahmadfma.intermediate_submission1.R
 import com.ahmadfma.intermediate_submission1.data.model.ListStoryItem
 import com.ahmadfma.intermediate_submission1.databinding.ActivityDetailBinding
+import com.ahmadfma.intermediate_submission1.helper.convertToDate
 import com.bumptech.glide.Glide
 
 class DetailActivity : AppCompatActivity() {
@@ -25,7 +26,7 @@ class DetailActivity : AppCompatActivity() {
                 .load(it.photoUrl)
                 .placeholder(R.color.grey)
                 .into(storyImage)
-            storyDate.text = it.createdAt
+            storyDate.text = getString(R.string.upload, it.createdAt?.convertToDate())
             storyDesc.text = it.description
             storyUsername.text = it.name
         }
