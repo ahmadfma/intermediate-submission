@@ -8,6 +8,16 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18" />
 
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+
+            <category android:name="android.intent.category.BROWSABLE" />
+
+            <data android:scheme="https" />
+        </intent>
+    </queries>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,6 +25,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Intermediate_Submission1">
+
+        <receiver
+            android:name=".widgets.ImageBannerWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/image_banner_widget_info" />
+        </receiver>
+
+        <service
+            android:name="com.ahmadfma.intermediate_submission1.widgets.StackWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <activity
             android:name=".ui.splash.SplashActivity"
@@ -25,26 +51,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.add_story.AddStoryActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.detail.DetailActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.register.RegisterActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.login.LoginActivity"
-            android:exported="false"/>
+            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -53,16 +74,8 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
+                android:resource="@xml/file_paths" />
         </provider>
     </application>
-
-    <queries>
-        <intent>
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="https" />
-        </intent>
-    </queries>
 
 </manifest>

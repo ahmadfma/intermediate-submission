@@ -33,6 +33,7 @@
     <string name="choose_picture">"Pilih sebuah gambar"</string>
     <string name="logout">Keluar</string>
     <string name="detail">Detail</string>
+    <string name="empty">Tidak ada data</string>
     <string name="transition_image">image</string>
     <string name="transition_username">username</string>
     <string name="transition_description">description</string>
