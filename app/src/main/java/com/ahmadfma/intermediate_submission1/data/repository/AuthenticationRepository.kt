@@ -20,8 +20,15 @@ class AuthenticationRepository(private val apiService: ApiService) {
         try {
             val returnValue = MutableLiveData<Result<MessageResponse?>>()
             val response = apiService.registerUser(username, email, password)
-            returnValue.value = Result.Success(response.body())
-            emitSource(returnValue)
+            if(response.isSuccessful) {
+                returnValue.value = Result.Success(response.body())
+                emitSource(returnValue)
+            } else {
+                val error = Gson().fromJson(response.errorBody()?.stringSuspending(), MessageResponse::class.java)
+                response.errorBody()?.close()
+                returnValue.value = Result.Success(error)
+                emitSource(returnValue)
+            }
         }
         catch (e: Exception) {
             emit(Result.Error(e.toString()))

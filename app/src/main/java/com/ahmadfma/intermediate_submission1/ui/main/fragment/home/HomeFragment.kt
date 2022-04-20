@@ -96,7 +96,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUi(response: GetStoryResponse) = with(binding) {
-        if(response.listStory.isNotEmpty()) {
+        if(response.listStory != null && response.listStory.isNotEmpty()) {
             storyAdapter.submitList(response.listStory)
             rvStories.layoutManager = LinearLayoutManager(requireContext())
             rvStories.setHasFixedSize(true)

@@ -38,7 +38,7 @@ class ImageBannerWidget : AppWidgetProvider() {
         val extra = intent.getParcelableExtra<GetStoryResponse>(EXTRA_ITEM)
         if(extra != null) {
             StackRemoteViewsFactory.mWidgetItems = arrayListOf()
-            extra.listStory.forEach {
+            extra.listStory?.forEach {
                 StackRemoteViewsFactory.mWidgetItems.add(Uri.parse(it.photoUrl))
             }
             val intent2 = Intent(context, StackWidgetService::class.java)
