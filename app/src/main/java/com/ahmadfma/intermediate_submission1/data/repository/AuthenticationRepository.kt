@@ -7,6 +7,10 @@ import com.ahmadfma.intermediate_submission1.data.model.MessageResponse
 import com.ahmadfma.intermediate_submission1.data.remote.ApiService
 import com.ahmadfma.intermediate_submission1.data.Result
 import com.ahmadfma.intermediate_submission1.data.model.LoginResponse
+import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import okhttp3.ResponseBody
 import java.lang.Exception
 
 class AuthenticationRepository(private val apiService: ApiService) {
@@ -29,8 +33,15 @@ class AuthenticationRepository(private val apiService: ApiService) {
         try {
             val returnValue = MutableLiveData<Result<LoginResponse?>>()
             val response = apiService.loginUser(email, password)
-            returnValue.value = Result.Success(response.body())
-            emitSource(returnValue)
+            if(response.isSuccessful) {
+                returnValue.value = Result.Success(response.body())
+                emitSource(returnValue)
+            } else {
+                val error = Gson().fromJson(response.errorBody()?.stringSuspending(), LoginResponse::class.java)
+                response.errorBody()?.close()
+                returnValue.value = Result.Success(error)
+                emitSource(returnValue)
+            }
         }
         catch (e: Exception) {
             emit(Result.Error(e.toString()))
@@ -38,3 +49,6 @@ class AuthenticationRepository(private val apiService: ApiService) {
     }
 
 }
+
+@Suppress("BlockingMethodInNonBlockingContext")
+suspend fun ResponseBody.stringSuspending() = withContext(Dispatchers.IO) { string() }
