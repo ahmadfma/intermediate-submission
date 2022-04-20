@@ -42,6 +42,9 @@ class RegisterActivity : AppCompatActivity() {
                 usernameInput = usernameInputRegister.text.toString()
                 emailInput = emailInputRegister.text.toString()
                 passwordInput = passwordInputRegister.text.toString()
+                usernameInputRegister.clearFocus()
+                emailInputRegister.clearFocus()
+                passwordInputRegister.clearFocus()
                 if(Validator.isFormValid(arrayOf(usernameInputRegister, emailInputRegister, passwordInputRegister))) {
                     registerUserListener()
                 } else {

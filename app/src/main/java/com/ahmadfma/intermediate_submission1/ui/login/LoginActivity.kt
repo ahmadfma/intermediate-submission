@@ -42,6 +42,8 @@ class LoginActivity : AppCompatActivity() {
             if(Validator.isAllFormFilled(arrayOf(emailInputLogin, passwordInputLogin))) {
                 emailInput = emailInputLogin.text.toString()
                 passwordInput = passwordInputLogin.text.toString()
+                emailInputLogin.clearFocus()
+                passwordInputLogin.clearFocus()
                 if(Validator.isFormValid(arrayOf(emailInputLogin, passwordInputLogin))) {
                     loginUserListener()
                 } else {
