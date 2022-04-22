@@ -20,10 +20,14 @@ class StoryAdapter: PagingDataAdapter<ListStoryItem, StoryAdapter.Holder>(DIFF_C
 
     inner class Holder(private val binding: ItemStoryBinding, private val onItemClickListener: OnItemClickListener): RecyclerView.ViewHolder(binding.root) {
         fun bind(storyItem: ListStoryItem) = with(binding){
+
             Glide.with(context)
+                .asBitmap()
                 .load(storyItem.photoUrl)
-                .placeholder(R.color.grey)
+                .placeholder(R.drawable.talk)
+                .error(R.drawable.talk2)
                 .into(storyImage)
+
             storyDate.text = context.getString(R.string.upload, storyItem.createdAt?.convertToDate())
             storyDesc.text = storyItem.description
             storyUsername.text = storyItem.name
