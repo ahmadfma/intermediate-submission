@@ -10,6 +10,7 @@ import com.ahmadfma.intermediate_submission1.data.local.StoryDatabase
 import com.ahmadfma.intermediate_submission1.data.model.GetStoryResponse
 import com.ahmadfma.intermediate_submission1.data.model.ListStoryItem
 import com.ahmadfma.intermediate_submission1.data.model.MessageResponse
+import com.ahmadfma.intermediate_submission1.data.remote.STORY_CONSIDERING_TO_LOCATION
 import com.ahmadfma.intermediate_submission1.data.remote.StoryRemoteMediator
 import com.google.gson.Gson
 import kotlinx.coroutines.delay
@@ -18,11 +19,11 @@ import okhttp3.RequestBody
 
 class StoryRepository(private val storyDatabase: StoryDatabase, private val apiService: ApiService) {
 
-    fun getStories() : LiveData<Result<GetStoryResponse?>> = liveData {
+    fun getStoriesWithLocation() : LiveData<Result<GetStoryResponse?>> = liveData {
         emit(Result.Loading)
         try {
             val returnValue = MutableLiveData<Result<GetStoryResponse?>>()
-            val response = apiService.getStories()
+            val response = apiService.getStories(page = 1, size = 15, location = STORY_CONSIDERING_TO_LOCATION)
             if(response.isSuccessful) {
                 returnValue.value = Result.Success(response.body())
                 emitSource(returnValue)

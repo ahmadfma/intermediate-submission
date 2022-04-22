@@ -18,6 +18,12 @@ const val PASSWORD_FIELD = "password"
 const val AUTHORIZATION = "Authorization"
 const val BEARER = "Bearer "
 const val DESCRIPTION_PART = "description"
+const val PAGE = "page"
+const val SIZE = "size"
+const val LOCATION = "location"
+const val STORY_NOT_CONSIDERING_TO_LOCATION = 0
+const val STORY_CONSIDERING_TO_LOCATION = 1
+
 
 interface ApiService {
 
@@ -38,14 +44,10 @@ interface ApiService {
 
     @GET(STORIES_ENDPOINT)
     suspend fun getStories(
-        @Header(AUTHORIZATION) token : String = BEARER + UserPreferences.user.token
-    ): Response<GetStoryResponse>
-
-    @GET(STORIES_ENDPOINT)
-    suspend fun getStories(
         @Header(AUTHORIZATION) token : String = BEARER + UserPreferences.user.token,
-        @Query("page") page: Int,
-        @Query("size") size: Int,
+        @Query(PAGE) page: Int,
+        @Query(SIZE) size: Int,
+        @Query(LOCATION) location: Int = STORY_NOT_CONSIDERING_TO_LOCATION
     ): Response<GetStoryResponse>
 
     @Multipart

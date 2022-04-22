@@ -14,8 +14,7 @@ class StoryViewModel(private val storyRepository: StoryRepository): ViewModel() 
 
     val stories: LiveData<PagingData<ListStoryItem>> = storyRepository.getStoriesWithPaging().cachedIn(viewModelScope)
 
-    @JvmName("getStories1")
-    fun getStories() = storyRepository.getStories()
+    fun getStoriesWithLocation() = storyRepository.getStoriesWithLocation()
 
     fun addNewStories(image: MultipartBody.Part, description: RequestBody) = storyRepository.addStories(image, description)
 }
