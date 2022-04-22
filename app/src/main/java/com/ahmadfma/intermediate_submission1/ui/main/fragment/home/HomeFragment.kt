@@ -7,12 +7,10 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.widget.Toast
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ahmadfma.intermediate_submission1.R
-import com.ahmadfma.intermediate_submission1.data.Result
 import com.ahmadfma.intermediate_submission1.data.model.GetStoryResponse
 import com.ahmadfma.intermediate_submission1.data.model.ListStoryItem
 import com.ahmadfma.intermediate_submission1.databinding.FragmentHomeBinding
@@ -22,6 +20,7 @@ import com.ahmadfma.intermediate_submission1.viewmodel.StoryViewModel
 import com.ahmadfma.intermediate_submission1.viewmodel.ViewModelFactory
 import androidx.core.util.Pair
 import com.ahmadfma.intermediate_submission1.databinding.ItemStoryBinding
+import com.ahmadfma.intermediate_submission1.ui.adapter.LoadingStateAdapter
 import com.ahmadfma.intermediate_submission1.ui.map.MapsActivity
 import com.ahmadfma.intermediate_submission1.widgets.ImageBannerWidget
 
@@ -41,6 +40,15 @@ class HomeFragment : Fragment() {
     private fun initVariable() {
         viewModel = ViewModelProvider(requireActivity(), ViewModelFactory.getInstance())[StoryViewModel::class.java]
         storyAdapter = StoryAdapter()
+        with(binding) {
+            rvStories.layoutManager = LinearLayoutManager(requireContext())
+            rvStories.setHasFixedSize(true)
+            rvStories.adapter = storyAdapter.withLoadStateFooter(
+                footer = LoadingStateAdapter {
+                    storyAdapter.retry()
+                }
+            )
+        }
     }
 
     private fun initListener() {
@@ -60,36 +68,10 @@ class HomeFragment : Fragment() {
             }
         })
 
-        setUi()
         showLoading(false)
         viewModel.stories.observe(viewLifecycleOwner) {
             storyAdapter.submitData(lifecycle, it)
         }
-
-//        viewModel.getStories().observe(viewLifecycleOwner) { result ->
-//            when(result) {
-//                is Result.Error -> {
-//                    showLoading(false)
-//                    Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
-//                }
-//                is Result.Loading -> {
-//                    showLoading(true)
-//                }
-//                is Result.Success -> {
-//                    showLoading(false)
-//                    val response = result.data
-//                    if(response != null) {
-//                        if(!response.error) {
-//                            setUi(response)
-//                        } else {
-//                            Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
-//                        }
-//                    } else {
-//                        Toast.makeText(requireContext(), getString(R.string.error), Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//            }
-//        }
 
         binding.homeToolbar.setOnMenuItemClickListener {
             when(it.itemId) {
@@ -103,21 +85,7 @@ class HomeFragment : Fragment() {
             }
             return@setOnMenuItemClickListener false
         }
-    }
 
-    private fun setUi() = with(binding) {
-        rvStories.layoutManager = LinearLayoutManager(requireContext())
-        rvStories.setHasFixedSize(true)
-        rvStories.adapter = storyAdapter
-//        if(response.listStory != null && response.listStory.isNotEmpty()) {
-//            storyAdapter.submitList(response.listStory)
-//            rvStories.layoutManager = LinearLayoutManager(requireContext())
-//            rvStories.setHasFixedSize(true)
-//            rvStories.adapter = storyAdapter
-//            updateStackWidget(response)
-//        } else {
-//            Toast.makeText(requireContext(), getString(R.string.empty), Toast.LENGTH_SHORT).show()
-//        }
     }
 
     private fun updateStackWidget(response: GetStoryResponse) {

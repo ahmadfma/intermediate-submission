@@ -36,4 +36,5 @@
     <string name="no_permission">Izin ditolak</string>
     <string name="widget_image">Gambar widget</string>
     <string name="map">Peta</string>
+    <string name="retry">Retry</string>
 </resources>
