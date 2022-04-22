@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.ahmadfma.intermediate_submission1.data.entity.StoryEntity
+import com.ahmadfma.intermediate_submission1.data.model.ListStoryItem
 
 @Database(
-    entities = [StoryEntity::class],
+    entities = [ListStoryItem::class],
     version = 1,
     exportSchema = false
 )

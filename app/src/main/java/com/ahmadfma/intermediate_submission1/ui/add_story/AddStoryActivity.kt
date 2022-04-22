@@ -47,7 +47,7 @@ class AddStoryActivity : AppCompatActivity() {
     }
 
     private fun initVariable() {
-        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance())[StoryViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(this))[StoryViewModel::class.java]
     }
 
     private fun initListener() = with(binding) {

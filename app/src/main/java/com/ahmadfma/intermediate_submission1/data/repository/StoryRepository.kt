@@ -3,22 +3,20 @@ package com.ahmadfma.intermediate_submission1.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import androidx.paging.liveData
+import androidx.paging.*
 import com.ahmadfma.intermediate_submission1.data.remote.ApiService
 import com.ahmadfma.intermediate_submission1.data.Result
+import com.ahmadfma.intermediate_submission1.data.local.StoryDatabase
 import com.ahmadfma.intermediate_submission1.data.model.GetStoryResponse
 import com.ahmadfma.intermediate_submission1.data.model.ListStoryItem
 import com.ahmadfma.intermediate_submission1.data.model.MessageResponse
-import com.ahmadfma.intermediate_submission1.data.paging.StoryPagingSource
+import com.ahmadfma.intermediate_submission1.data.remote.StoryRemoteMediator
 import com.google.gson.Gson
 import kotlinx.coroutines.delay
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
-class StoryRepository(private val apiService: ApiService) {
+class StoryRepository(private val storyDatabase: StoryDatabase, private val apiService: ApiService) {
 
     fun getStories() : LiveData<Result<GetStoryResponse?>> = liveData {
         emit(Result.Loading)
@@ -62,12 +60,14 @@ class StoryRepository(private val apiService: ApiService) {
     }
 
     fun getStoriesWithPaging(): LiveData<PagingData<ListStoryItem>> {
+        @OptIn(ExperimentalPagingApi::class)
         return Pager(
             config = PagingConfig(
                 pageSize = 5
             ),
+            remoteMediator = StoryRemoteMediator(storyDatabase, apiService),
             pagingSourceFactory = {
-                StoryPagingSource(apiService)
+                storyDatabase.storyDao().getStories()
             }
         ).liveData
     }

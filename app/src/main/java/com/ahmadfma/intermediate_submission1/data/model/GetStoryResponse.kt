@@ -1,6 +1,8 @@
 package com.ahmadfma.intermediate_submission1.data.model
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
@@ -16,8 +18,15 @@ data class GetStoryResponse(
 	val message: String
 ) : Parcelable
 
+
+@Entity(tableName = "list_story")
 @Parcelize
 data class ListStoryItem(
+
+	@PrimaryKey
+	@field:SerializedName("id")
+	val id: String,
+
 	@field:SerializedName("photoUrl")
 	val photoUrl: String? = null,
 

@@ -5,6 +5,7 @@ import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.core.app.ActivityOptionsCompat
@@ -38,7 +39,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initVariable() {
-        viewModel = ViewModelProvider(requireActivity(), ViewModelFactory.getInstance())[StoryViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity(), ViewModelFactory.getInstance(requireContext()))[StoryViewModel::class.java]
         storyAdapter = StoryAdapter()
         with(binding) {
             rvStories.layoutManager = LinearLayoutManager(requireContext())
@@ -70,6 +71,7 @@ class HomeFragment : Fragment() {
 
         showLoading(false)
         viewModel.stories.observe(viewLifecycleOwner) {
+            Log.d("STORIES", "data : $it")
             storyAdapter.submitData(lifecycle, it)
         }
 

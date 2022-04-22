@@ -11,10 +11,10 @@ import com.ahmadfma.intermediate_submission1.data.model.ListStoryItem
 interface StoryDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertQuote(quote: List<ListStoryItem>)
+    suspend fun insertStories(stories: List<ListStoryItem>)
 
     @Query("SELECT * FROM list_story")
-    fun getAllQuote(): PagingSource<Int, ListStoryItem>
+    fun getStories(): PagingSource<Int, ListStoryItem>
 
     @Query("DELETE FROM list_story")
     suspend fun deleteAll()

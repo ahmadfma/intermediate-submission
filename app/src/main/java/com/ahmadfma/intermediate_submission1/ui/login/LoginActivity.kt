@@ -34,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initVariable() {
-        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance())[AuthenticationViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(this))[AuthenticationViewModel::class.java]
     }
 
     private fun initListener() = with(binding) {
