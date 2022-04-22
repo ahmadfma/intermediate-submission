@@ -25,6 +25,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Intermediate_Submission1">
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBZIy7IOO3a6_024zApJUSTsoAAYDJm8fI" />
+
         <receiver
             android:name=".widgets.ImageBannerWidget"
             android:exported="false">
