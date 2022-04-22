@@ -4,14 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/drawable/button_background.xml" value="0.1685" />
+        <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/drawable/circle_background.xml" value="0.168" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/drawable/ic_add.xml" value="0.1685" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/drawable/ic_add2.xml" value="0.1685" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/drawable/ic_back.xml" value="0.1685" />
+        <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/drawable/ic_back_white.xml" value="0.168" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/drawable/ic_camera.xml" value="0.1685" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/drawable/ic_language.xml" value="0.1685" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/drawable/ic_logout.xml" value="0.1685" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/drawable/ic_map.xml" value="0.1695" />
+        <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/drawable/ic_next.xml" value="0.168" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/drawable/ic_person.xml" value="0.1685" />
+        <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/drawable/ic_prev.xml" value="0.168" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/drawable/ic_setting.xml" value="0.1685" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/drawable/ic_user.xml" value="0.1685" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/drawable/transparent_background.xml" value="0.1685" />
@@ -30,12 +34,14 @@
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/layout/fragment_profile.xml" value="0.24010416666666667" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/layout/fragment_splash.xml" value="0.25416666666666665" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/layout/image_banner_widget.xml" value="0.20599409033347404" />
+        <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/layout/item_map_story.xml" value="0.20863616930312098" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/layout/item_story.xml" value="0.152" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/layout/item_story_loading.xml" value="0.20863616930312098" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/layout/progress_dialog.xml" value="0.264" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/layout/widget_item.xml" value="0.20863616930312098" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/menu/bottom_navigation_main.xml" value="0.25025641025641027" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/menu/home_app_bar.xml" value="0.25416666666666665" />
+        <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/menu/map_app_bar.xml" value="0.20863616930312098" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/xml/file_paths.xml" value="0.14398812469074715" />
       </map>
     </option>
