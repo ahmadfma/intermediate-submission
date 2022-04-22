@@ -35,4 +35,5 @@
     <string name="upload">Diunggah pada %1$s</string>
     <string name="no_permission">Izin ditolak</string>
     <string name="widget_image">Gambar widget</string>
+    <string name="map">Peta</string>
 </resources>

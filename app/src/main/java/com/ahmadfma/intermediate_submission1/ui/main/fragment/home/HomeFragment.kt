@@ -90,6 +90,9 @@ class HomeFragment : Fragment() {
                     startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
                     return@setOnMenuItemClickListener  true
                 }
+                R.id.gotoMaps -> {
+                    Toast.makeText(requireContext(), "Maps", Toast.LENGTH_SHORT).show()
+                }
             }
             return@setOnMenuItemClickListener false
         }

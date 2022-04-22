@@ -41,4 +41,5 @@
     <string name="transition_username" translatable="false">username</string>
     <string name="transition_description" translatable="false">description</string>
     <string name="transition_date" translatable="false">date</string>
+    <string name="map">Map</string>
 </resources>
