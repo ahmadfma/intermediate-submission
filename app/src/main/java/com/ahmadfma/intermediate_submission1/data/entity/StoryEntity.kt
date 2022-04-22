@@ -4,7 +4,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "list_story")
+const val STORY_TABLE_NAME = "list_story"
+@Entity(tableName = STORY_TABLE_NAME)
 data class StoryEntity(
     @PrimaryKey
     @field:SerializedName("id")
