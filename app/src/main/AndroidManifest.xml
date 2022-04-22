@@ -5,7 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
 
     <queries>
         <intent>
@@ -29,6 +31,11 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBZIy7IOO3a6_024zApJUSTsoAAYDJm8fI" />
 
+        <activity
+            android:name=".ui.map.MapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_maps" />
+
         <receiver
             android:name=".widgets.ImageBannerWidget"
             android:exported="false">
@@ -42,7 +49,7 @@
         </receiver>
 
         <service
-            android:name="com.ahmadfma.intermediate_submission1.widgets.StackWidgetService"
+            android:name=".widgets.StackWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <activity

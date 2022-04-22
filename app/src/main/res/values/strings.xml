@@ -42,4 +42,5 @@
     <string name="transition_description" translatable="false">description</string>
     <string name="transition_date" translatable="false">date</string>
     <string name="map">Map</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

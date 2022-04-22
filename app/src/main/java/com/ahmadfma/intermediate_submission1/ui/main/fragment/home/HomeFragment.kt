@@ -22,6 +22,7 @@ import com.ahmadfma.intermediate_submission1.viewmodel.StoryViewModel
 import com.ahmadfma.intermediate_submission1.viewmodel.ViewModelFactory
 import androidx.core.util.Pair
 import com.ahmadfma.intermediate_submission1.databinding.ItemStoryBinding
+import com.ahmadfma.intermediate_submission1.ui.map.MapsActivity
 import com.ahmadfma.intermediate_submission1.widgets.ImageBannerWidget
 
 class HomeFragment : Fragment() {
@@ -91,7 +92,7 @@ class HomeFragment : Fragment() {
                     return@setOnMenuItemClickListener  true
                 }
                 R.id.gotoMaps -> {
-                    Toast.makeText(requireContext(), "Maps", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(requireActivity(), MapsActivity::class.java))
                 }
             }
             return@setOnMenuItemClickListener false

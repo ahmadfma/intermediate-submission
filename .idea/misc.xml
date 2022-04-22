@@ -10,6 +10,7 @@
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/drawable/ic_camera.xml" value="0.1685" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/drawable/ic_language.xml" value="0.1685" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/drawable/ic_logout.xml" value="0.1685" />
+        <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/drawable/ic_map.xml" value="0.1695" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/drawable/ic_person.xml" value="0.1685" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/drawable/ic_setting.xml" value="0.1685" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/drawable/ic_user.xml" value="0.1685" />
@@ -19,6 +20,7 @@
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/layout/activity_list_story.xml" value="0.25416666666666665" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/layout/activity_maps.xml" value="0.20863616930312098" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/layout/activity_register.xml" value="0.25416666666666665" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/layout/activity_splash.xml" value="0.25416666666666665" />
         <entry key="..\:/Me/Android/Intermediate_Submission1/app/src/main/res/layout/comment_edit_text.xml" value="0.19342053111375346" />
