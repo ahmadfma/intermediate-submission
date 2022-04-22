@@ -41,6 +41,13 @@ interface ApiService {
         @Header(AUTHORIZATION) token : String = BEARER + UserPreferences.user.token
     ): Response<GetStoryResponse>
 
+    @GET(STORIES_ENDPOINT)
+    suspend fun getStories(
+        @Header(AUTHORIZATION) token : String = BEARER + UserPreferences.user.token,
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+    ): Response<GetStoryResponse>
+
     @Multipart
     @POST(STORIES_ENDPOINT)
     suspend fun addNewStories(

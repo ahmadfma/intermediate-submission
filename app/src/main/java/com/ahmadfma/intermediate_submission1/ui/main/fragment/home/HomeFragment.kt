@@ -60,30 +60,36 @@ class HomeFragment : Fragment() {
             }
         })
 
-        viewModel.getStories().observe(viewLifecycleOwner) { result ->
-            when(result) {
-                is Result.Error -> {
-                    showLoading(false)
-                    Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
-                }
-                is Result.Loading -> {
-                    showLoading(true)
-                }
-                is Result.Success -> {
-                    showLoading(false)
-                    val response = result.data
-                    if(response != null) {
-                        if(!response.error) {
-                            setUi(response)
-                        } else {
-                            Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
-                        }
-                    } else {
-                        Toast.makeText(requireContext(), getString(R.string.error), Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
+        setUi()
+        showLoading(false)
+        viewModel.stories.observe(viewLifecycleOwner) {
+            storyAdapter.submitData(lifecycle, it)
         }
+
+//        viewModel.getStories().observe(viewLifecycleOwner) { result ->
+//            when(result) {
+//                is Result.Error -> {
+//                    showLoading(false)
+//                    Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
+//                }
+//                is Result.Loading -> {
+//                    showLoading(true)
+//                }
+//                is Result.Success -> {
+//                    showLoading(false)
+//                    val response = result.data
+//                    if(response != null) {
+//                        if(!response.error) {
+//                            setUi(response)
+//                        } else {
+//                            Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
+//                        }
+//                    } else {
+//                        Toast.makeText(requireContext(), getString(R.string.error), Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//            }
+//        }
 
         binding.homeToolbar.setOnMenuItemClickListener {
             when(it.itemId) {
@@ -99,16 +105,19 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setUi(response: GetStoryResponse) = with(binding) {
-        if(response.listStory != null && response.listStory.isNotEmpty()) {
-            storyAdapter.submitList(response.listStory)
-            rvStories.layoutManager = LinearLayoutManager(requireContext())
-            rvStories.setHasFixedSize(true)
-            rvStories.adapter = storyAdapter
-            updateStackWidget(response)
-        } else {
-            Toast.makeText(requireContext(), getString(R.string.empty), Toast.LENGTH_SHORT).show()
-        }
+    private fun setUi() = with(binding) {
+        rvStories.layoutManager = LinearLayoutManager(requireContext())
+        rvStories.setHasFixedSize(true)
+        rvStories.adapter = storyAdapter
+//        if(response.listStory != null && response.listStory.isNotEmpty()) {
+//            storyAdapter.submitList(response.listStory)
+//            rvStories.layoutManager = LinearLayoutManager(requireContext())
+//            rvStories.setHasFixedSize(true)
+//            rvStories.adapter = storyAdapter
+//            updateStackWidget(response)
+//        } else {
+//            Toast.makeText(requireContext(), getString(R.string.empty), Toast.LENGTH_SHORT).show()
+//        }
     }
 
     private fun updateStackWidget(response: GetStoryResponse) {

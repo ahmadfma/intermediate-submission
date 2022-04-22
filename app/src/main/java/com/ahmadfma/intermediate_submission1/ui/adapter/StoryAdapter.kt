@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +14,7 @@ import com.ahmadfma.intermediate_submission1.databinding.ItemStoryBinding
 import com.ahmadfma.intermediate_submission1.helper.convertToDate
 import com.bumptech.glide.Glide
 
-class StoryAdapter: ListAdapter<ListStoryItem, StoryAdapter.Holder>(DIFF_CALLBACK) {
+class StoryAdapter: PagingDataAdapter<ListStoryItem, StoryAdapter.Holder>(DIFF_CALLBACK) {
 
     private lateinit var context: Context
     private lateinit var onItemClickListener: OnItemClickListener
@@ -42,7 +43,7 @@ class StoryAdapter: ListAdapter<ListStoryItem, StoryAdapter.Holder>(DIFF_CALLBAC
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.bind(getItem(position))
+        getItem(position)?.let { holder.bind(it) }
     }
 
     fun setListener(onItemClickListener: OnItemClickListener) {
