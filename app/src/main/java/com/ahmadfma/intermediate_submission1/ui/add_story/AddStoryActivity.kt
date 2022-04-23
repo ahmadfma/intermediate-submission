@@ -125,8 +125,8 @@ class AddStoryActivity : AppCompatActivity() {
     }
 
     private fun startIntentCamera() {
-        if (!allPermissionsGranted()) {
-            ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
+        if (!allCameraPermissionsGranted()) {
+            ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS_CAMERA, REQUEST_CODE_CAMERA)
         } else {
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             intent.resolveActivity(packageManager)
@@ -148,20 +148,32 @@ class AddStoryActivity : AppCompatActivity() {
     }
 
     private fun startIntentChooseLocation() {
-        val intent = Intent(this, ChooseLocationActivity::class.java)
-        launcherChoosePosition.launch(intent)
+        if(!allLocationPermissionsGranted()) {
+            ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS_LOCATION, REQUEST_CODE_LOCATION)
+        } else {
+            val intent = Intent(this, ChooseLocationActivity::class.java)
+            launcherChoosePosition.launch(intent)
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_CODE_PERMISSIONS) {
-            if (!allPermissionsGranted()) {
+        if (requestCode == REQUEST_CODE_CAMERA) {
+            if (!allCameraPermissionsGranted()) {
+                Toast.makeText(this, getString(R.string.no_permission), Toast.LENGTH_SHORT).show()
+            }
+        } else if(requestCode == REQUEST_CODE_LOCATION) {
+            if(!allLocationPermissionsGranted()) {
                 Toast.makeText(this, getString(R.string.no_permission), Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
+    private fun allCameraPermissionsGranted() = REQUIRED_PERMISSIONS_CAMERA.all {
+        ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun allLocationPermissionsGranted() = REQUIRED_PERMISSIONS_LOCATION.all {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
 
@@ -197,8 +209,10 @@ class AddStoryActivity : AppCompatActivity() {
     }
 
     companion object {
-        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-        private const val REQUEST_CODE_PERMISSIONS = 10
+        private val REQUIRED_PERMISSIONS_CAMERA = arrayOf(Manifest.permission.CAMERA)
+        private val REQUIRED_PERMISSIONS_LOCATION = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
+        private const val REQUEST_CODE_CAMERA = 10
+        private const val REQUEST_CODE_LOCATION = 11
         private const val AUTHOR = "com.ahmadfma.intermediate_submission1"
     }
 
