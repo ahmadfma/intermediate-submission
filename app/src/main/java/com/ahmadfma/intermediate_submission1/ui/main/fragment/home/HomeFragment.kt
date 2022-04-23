@@ -20,8 +20,6 @@ import com.ahmadfma.intermediate_submission1.ui.detail.DetailActivity
 import com.ahmadfma.intermediate_submission1.viewmodel.StoryViewModel
 import com.ahmadfma.intermediate_submission1.viewmodel.ViewModelFactory
 import androidx.core.util.Pair
-import androidx.paging.PagingData
-import androidx.paging.map
 import com.ahmadfma.intermediate_submission1.databinding.ItemStoryBinding
 import com.ahmadfma.intermediate_submission1.ui.adapter.LoadingStateAdapter
 import com.ahmadfma.intermediate_submission1.ui.maps.MapsActivity
@@ -75,8 +73,8 @@ class HomeFragment : Fragment() {
             }
         })
 
-        showLoading(false)
         viewModel.stories.observe(viewLifecycleOwner) {
+            Log.d(TAG, "stories: ${storyAdapter.snapshot().items.size}")
             updateStackWidget(storyAdapter.snapshot().items)
             storyAdapter.submitData(lifecycle, it)
         }
@@ -97,7 +95,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun updateStackWidget(stories: List<ListStoryItem>) {
-
         val response = GetStoryResponse(
             listStory = stories,
             message = "updateStackWidget",
@@ -111,23 +108,10 @@ class HomeFragment : Fragment() {
         requireActivity().sendBroadcast(intent)
     }
 
-    private fun showLoading(isLoading: Boolean) = with(binding) {
-        when(isLoading) {
-            true -> {
-                homeProgressBar.visibility = View.VISIBLE
-                rvStories.visibility = View.GONE
-            }
-            false -> {
-                homeProgressBar.visibility = View.GONE
-                rvStories.visibility = View.VISIBLE
-            }
-        }
+    override fun onStart() {
+        super.onStart()
+        storyAdapter.refresh()
     }
 
-    override fun onResume() {
-        super.onResume()
-        storyAdapter.refresh()
-        binding.rvStories.scrollToPosition(0)
-    }
-    
+
 }
