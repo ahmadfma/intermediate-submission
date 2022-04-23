@@ -20,6 +20,8 @@ import com.ahmadfma.intermediate_submission1.ui.detail.DetailActivity
 import com.ahmadfma.intermediate_submission1.viewmodel.StoryViewModel
 import com.ahmadfma.intermediate_submission1.viewmodel.ViewModelFactory
 import androidx.core.util.Pair
+import androidx.paging.PagingData
+import androidx.paging.map
 import com.ahmadfma.intermediate_submission1.databinding.ItemStoryBinding
 import com.ahmadfma.intermediate_submission1.ui.adapter.LoadingStateAdapter
 import com.ahmadfma.intermediate_submission1.ui.maps.MapsActivity
@@ -29,9 +31,13 @@ class HomeFragment : Fragment() {
     private lateinit var binding : FragmentHomeBinding
     private lateinit var viewModel: StoryViewModel
     private lateinit var storyAdapter: StoryAdapter
+    private companion object {
+        const val TAG = "HomeFragment"
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentHomeBinding.inflate(inflater)
+        Log.d(TAG, "onCreateView: ")
         setHasOptionsMenu(true)
         initVariable()
         initListener()
@@ -71,7 +77,7 @@ class HomeFragment : Fragment() {
 
         showLoading(false)
         viewModel.stories.observe(viewLifecycleOwner) {
-            Log.d("STORIES", "data : $it")
+            updateStackWidget(storyAdapter.snapshot().items)
             storyAdapter.submitData(lifecycle, it)
         }
 
@@ -90,7 +96,13 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun updateStackWidget(response: GetStoryResponse) {
+    private fun updateStackWidget(stories: List<ListStoryItem>) {
+
+        val response = GetStoryResponse(
+            listStory = stories,
+            message = "updateStackWidget",
+            error = false
+        )
         val intent = Intent(requireContext(), ImageBannerWidget::class.java)
         intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
         val ids = AppWidgetManager.getInstance(requireContext().applicationContext).getAppWidgetIds(ComponentName(requireContext(), ImageBannerWidget::class.java))
@@ -112,4 +124,10 @@ class HomeFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        storyAdapter.refresh()
+        binding.rvStories.scrollToPosition(0)
+    }
+    
 }
