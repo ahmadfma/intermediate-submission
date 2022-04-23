@@ -38,6 +38,7 @@ class ImageBannerWidget : AppWidgetProvider() {
         super.onReceive(context, intent)
         val extra = intent.getParcelableExtra<GetStoryResponse>(EXTRA_ITEM)
         if(extra != null) {
+            Log.d("Stack", "onReceive: not null")
             StackRemoteViewsFactory.mWidgetItems = arrayListOf()
             extra.listStory?.forEach {
                 StackRemoteViewsFactory.mWidgetItems.add(Uri.parse(it.photoUrl))
@@ -49,6 +50,8 @@ class ImageBannerWidget : AppWidgetProvider() {
             views.setEmptyView(R.id.stack_view, R.id.empty_view)
             val manager = AppWidgetManager.getInstance(context)
             manager.updateAppWidget(ComponentName(context, ImageBannerWidget::class.java), views)
+        } else {
+            Log.d("Stack", "onReceive: null")
         }
     }
 

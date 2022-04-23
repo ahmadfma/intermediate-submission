@@ -33,22 +33,20 @@ internal class StackRemoteViewsFactory(private val context: Context): RemoteView
 
     override fun getViewAt(position: Int): RemoteViews {
         val rv = RemoteViews(context.packageName, R.layout.widget_item)
-        if(items.isNotEmpty()) {
-            val bitmap : Bitmap = try {
-                Glide.with(context)
-                    .asBitmap()
-                    .load(items[position])
-                    .submit(512, 512)
-                    .get()
-            } catch (e : Exception) {
-                Glide.with(context)
-                    .asBitmap()
-                    .load(R.drawable.talk)
-                    .submit(512, 512)
-                    .get()
-            }
-            rv.setImageViewBitmap(R.id.imageView, bitmap)
+        val bitmap : Bitmap = try {
+            Glide.with(context)
+                .asBitmap()
+                .load(items[position])
+                .submit(512, 512)
+                .get()
+        } catch (e : Exception) {
+            Glide.with(context)
+                .asBitmap()
+                .load(R.drawable.talk)
+                .submit(512, 512)
+                .get()
         }
+        rv.setImageViewBitmap(R.id.imageView, bitmap)
         val extras = bundleOf(
             ImageBannerWidget.EXTRA_ITEM to position
         )

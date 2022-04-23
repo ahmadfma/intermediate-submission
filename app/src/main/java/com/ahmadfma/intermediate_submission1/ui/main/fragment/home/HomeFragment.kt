@@ -95,17 +95,20 @@ class HomeFragment : Fragment() {
     }
 
     private fun updateStackWidget(stories: List<ListStoryItem>) {
-        val response = GetStoryResponse(
-            listStory = stories,
-            message = "updateStackWidget",
-            error = false
-        )
-        val intent = Intent(requireContext(), ImageBannerWidget::class.java)
-        intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
-        val ids = AppWidgetManager.getInstance(requireContext().applicationContext).getAppWidgetIds(ComponentName(requireContext(), ImageBannerWidget::class.java))
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
-        intent.putExtra(ImageBannerWidget.EXTRA_ITEM, response)
-        requireActivity().sendBroadcast(intent)
+        if(stories.isNotEmpty()) {
+            Log.d(TAG, "updateStackWidget: send broadcast")
+            val response = GetStoryResponse(
+                listStory = stories,
+                message = "updateStackWidget",
+                error = false
+            )
+            val intent = Intent(requireContext(), ImageBannerWidget::class.java)
+            intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+            val ids = AppWidgetManager.getInstance(requireContext().applicationContext).getAppWidgetIds(ComponentName(requireContext(), ImageBannerWidget::class.java))
+            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
+            intent.putExtra(ImageBannerWidget.EXTRA_ITEM, response)
+            requireActivity().sendBroadcast(intent)   
+        }
     }
 
     override fun onStart() {
