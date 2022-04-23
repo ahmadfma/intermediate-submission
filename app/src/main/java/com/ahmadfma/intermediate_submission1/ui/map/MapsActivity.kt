@@ -2,6 +2,7 @@ package com.ahmadfma.intermediate_submission1.ui.map
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 
 
@@ -33,6 +35,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var viewModel: StoryViewModel
     private var listStory : List<ListStoryItem>? = null
     private var currentShowIndex = 0
+    private companion object {
+        const val TAG = "MapsActivity"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -160,10 +165,22 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        setMapStyle()
         mMap.uiSettings.isZoomControlsEnabled = true
         mMap.uiSettings.isIndoorLevelPickerEnabled = true
         mMap.uiSettings.isCompassEnabled = true
         mMap.uiSettings.isMapToolbarEnabled = true
+    }
+
+    private fun setMapStyle() {
+        try {
+            val success = mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style))
+            if (!success) {
+                Log.e(TAG, "Style parsing failed.")
+            }
+        } catch (exception: Exception) {
+            Log.e(TAG, "Can't find style. Error: ", exception)
+        }
     }
 
     private fun showLoadingInBottomStory(isLoading: Boolean) = with(binding) {
