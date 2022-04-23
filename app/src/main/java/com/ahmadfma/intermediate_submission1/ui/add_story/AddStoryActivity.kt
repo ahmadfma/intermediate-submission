@@ -152,6 +152,8 @@ class AddStoryActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS_LOCATION, REQUEST_CODE_LOCATION)
         } else {
             val intent = Intent(this, ChooseLocationActivity::class.java)
+            intent.putExtra(ChooseLocationActivity.EXTRA_LATITUDE, latitude)
+            intent.putExtra(ChooseLocationActivity.EXTRA_LONGITUDE, longitude)
             launcherChoosePosition.launch(intent)
         }
     }
