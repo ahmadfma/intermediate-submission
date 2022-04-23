@@ -61,6 +61,9 @@ class ChooseLocationActivity : AppCompatActivity(), OnMapReadyCallback {
                 Toast.makeText(this@ChooseLocationActivity, "Please select your location", Toast.LENGTH_SHORT).show()
             }
         }
+        backBtn.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
