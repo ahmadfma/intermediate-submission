@@ -16,5 +16,10 @@ class StoryViewModel(private val storyRepository: StoryRepository): ViewModel() 
 
     fun getStoriesWithLocation() = storyRepository.getStoriesWithLocation()
 
-    fun addNewStories(image: MultipartBody.Part, description: RequestBody) = storyRepository.addStories(image, description)
+    fun addNewStories(
+        image: MultipartBody.Part,
+        description: RequestBody,
+        latitude: RequestBody? = null,
+        longitude: RequestBody? = null
+    ) = storyRepository.addStories(image, description, latitude, longitude)
 }

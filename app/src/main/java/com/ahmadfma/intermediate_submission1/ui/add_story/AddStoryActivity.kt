@@ -97,7 +97,9 @@ class AddStoryActivity : AppCompatActivity() {
     }
 
     private fun uploadListener(imageMultipart: MultipartBody.Part, description: RequestBody) {
-        viewModel.addNewStories(imageMultipart, description).observe(this) { result ->
+        val lat = latitude?.toString()?.toRequestBody()
+        val lon = longitude?.toString()?.toRequestBody()
+        viewModel.addNewStories(imageMultipart, description, lat, lon).observe(this) { result ->
             when(result) {
                 is Result.Loading -> {
                     progressDialog.startLoadingDialog()
