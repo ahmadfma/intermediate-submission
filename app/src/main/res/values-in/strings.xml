@@ -23,8 +23,8 @@
     <string name="story_image">story image</string>
     <string name="user_icon">Icon Pengguna</string>
     <string name="setting">Pengaturan</string>
-    <string name="choose_from_gallery">Pilih dari galeri</string>
-    <string name="choose_from_camera">Pilih dari kamera</string>
+    <string name="choose_from_gallery">Galeri</string>
+    <string name="choose_from_camera">Kamera</string>
     <string name="upload_button">Tombol unggah</string>
     <string name="uploading">Mengunggah</string>
     <string name="add_story_success">Tambah cerita berhasil</string>
@@ -37,4 +37,7 @@
     <string name="widget_image">Gambar widget</string>
     <string name="map">Peta</string>
     <string name="retry">Retry</string>
+    <string name="select_location">Lokasi</string>
+    <string name="your_location">Lokasi anda</string>
+    <string name="select">select</string>
 </resources>

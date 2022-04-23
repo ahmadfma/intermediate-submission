@@ -24,8 +24,8 @@
     <string name="story_image">story image</string>
     <string name="user_icon">user icon</string>
     <string name="setting">Setting</string>
-    <string name="choose_from_gallery">Choose from gallery</string>
-    <string name="choose_from_camera">Choose from camera</string>
+    <string name="choose_from_gallery">Gallery</string>
+    <string name="choose_from_camera">Camera</string>
     <string name="upload_button">Upload Button</string>
     <string name="uploading">Uploading</string>
     <string name="add_story_success">Add story success</string>
@@ -42,7 +42,10 @@
     <string name="transition_description" translatable="false">description</string>
     <string name="transition_date" translatable="false">date</string>
     <string name="map">Map</string>
-    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_maps" translatable="false">MapsActivity</string>
     <string name="retry">Retry</string>
-    <string name="title_activity_choose_location">ChooseLocationActivity</string>
+    <string name="title_activity_choose_location" translatable="false">ChooseLocationActivity</string>
+    <string name="select_location">Location</string>
+    <string name="your_location">Your location</string>
+    <string name="select">select</string>
 </resources>

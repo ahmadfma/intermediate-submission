@@ -28,11 +28,11 @@
             android:value="AIzaSyBZIy7IOO3a6_024zApJUSTsoAAYDJm8fI" />
 
         <activity
-            android:name=".ui.map.ChooseLocationActivity"
+            android:name=".ui.maps.ChooseLocationActivity"
             android:exported="false"
             android:label="@string/title_activity_choose_location" />
         <activity
-            android:name=".ui.map.MapsActivity"
+            android:name=".ui.maps.MapsActivity"
             android:exported="false"
             android:label="@string/title_activity_maps" />
 

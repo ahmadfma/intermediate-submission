@@ -22,7 +22,7 @@ import com.ahmadfma.intermediate_submission1.viewmodel.ViewModelFactory
 import androidx.core.util.Pair
 import com.ahmadfma.intermediate_submission1.databinding.ItemStoryBinding
 import com.ahmadfma.intermediate_submission1.ui.adapter.LoadingStateAdapter
-import com.ahmadfma.intermediate_submission1.ui.map.MapsActivity
+import com.ahmadfma.intermediate_submission1.ui.maps.MapsActivity
 import com.ahmadfma.intermediate_submission1.widgets.ImageBannerWidget
 
 class HomeFragment : Fragment() {

@@ -1,4 +1,4 @@
-package com.ahmadfma.intermediate_submission1.ui.map
+package com.ahmadfma.intermediate_submission1.ui.maps
 
 import android.content.Intent
 import android.os.Bundle

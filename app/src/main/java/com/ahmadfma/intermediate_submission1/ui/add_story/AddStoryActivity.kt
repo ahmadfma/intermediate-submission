@@ -3,6 +3,7 @@ package com.ahmadfma.intermediate_submission1.ui.add_story
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.ColorStateList
 import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.view.ViewCompat
 import androidx.lifecycle.ViewModelProvider
 import com.ahmadfma.intermediate_submission1.R
 import com.ahmadfma.intermediate_submission1.custom.ProgressDialog
@@ -29,6 +31,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
 import com.ahmadfma.intermediate_submission1.data.Result
+import com.ahmadfma.intermediate_submission1.ui.maps.ChooseLocationActivity
 
 class AddStoryActivity : AppCompatActivity() {
 
@@ -37,6 +40,8 @@ class AddStoryActivity : AppCompatActivity() {
     private lateinit var currentPhotoPath: String
     private var selectedImageFile: File? = null
     private val progressDialog = ProgressDialog(this)
+    private var latitude : Float? = null
+    private var longitude : Float? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +64,9 @@ class AddStoryActivity : AppCompatActivity() {
         }
         chooseFromCameraBtn.setOnClickListener {
             startIntentCamera()
+        }
+        chooseLocationBtn.setOnClickListener {
+            startIntentChooseLocation()
         }
         uploadBtn.setOnClickListener {
             checkInputs()
@@ -139,6 +147,11 @@ class AddStoryActivity : AppCompatActivity() {
         launcherIntentGallery.launch(chooser)
     }
 
+    private fun startIntentChooseLocation() {
+        val intent = Intent(this, ChooseLocationActivity::class.java)
+        launcherChoosePosition.launch(intent)
+    }
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
@@ -168,6 +181,17 @@ class AddStoryActivity : AppCompatActivity() {
                 binding.storyImage.setImageBitmap(result)
             } else {
                 Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private val launcherChoosePosition = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == RESULT_OK) {
+            val data = it.data
+            if(data != null) {
+                latitude = data.getFloatExtra(ChooseLocationActivity.EXTRA_LATITUDE, 0f)
+                longitude = data.getFloatExtra(ChooseLocationActivity.EXTRA_LONGITUDE, 0f)
+                ViewCompat.setBackgroundTintList(binding.chooseLocationBtn, ColorStateList.valueOf(ContextCompat.getColor(this, R.color.blue)))
             }
         }
     }
