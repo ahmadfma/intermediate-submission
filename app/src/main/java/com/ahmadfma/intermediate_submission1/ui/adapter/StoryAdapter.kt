@@ -29,7 +29,7 @@ class StoryAdapter: PagingDataAdapter<ListStoryItem, StoryAdapter.Holder>(DIFF_C
                 .into(storyImage)
 
             storyDate.text = context.getString(R.string.upload, storyItem.createdAt?.convertToDate())
-            storyDesc.text = storyItem.description
+            storyDesc.text = storyItem.description?.trim()
             storyUsername.text = storyItem.name
 
             root.setOnClickListener {

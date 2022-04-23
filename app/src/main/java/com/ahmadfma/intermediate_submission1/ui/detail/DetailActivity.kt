@@ -27,7 +27,7 @@ class DetailActivity : AppCompatActivity() {
                 .placeholder(R.color.grey)
                 .into(storyImage)
             storyDate.text = getString(R.string.upload, it.createdAt?.convertToDate())
-            storyDesc.text = it.description
+            storyDesc.text = it.description?.trim()
             storyUsername.text = it.name
         }
 

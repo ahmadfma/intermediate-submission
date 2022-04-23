@@ -2,11 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:elevation="10dp"
     android:layout_width="match_parent"
+    android:layout_height="130dp"
     android:background="@color/white"
     android:paddingStart="15dp"
-    android:paddingEnd="15dp"
-    android:layout_height="130dp">
+    android:paddingEnd="15dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -37,31 +38,49 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cardView"
         app:layout_constraintTop_toTopOf="@+id/cardView"
-        android:text="Ahmad Fathanah" />
+        tools:text="Ahmad Fathanah" />
 
     <TextView
         android:id="@+id/mapStoryDesc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:maxLines="2"
+        android:textColor="@color/black2"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cardView"
         app:layout_constraintTop_toBottomOf="@+id/mapStoryName"
-        android:layout_marginStart="15dp"
-        android:textColor="@color/black2"
-        android:textSize="12sp"
-        android:maxLines="2"
-        android:text="akawj aw awoiaw awiodjawoijw oijawoja wodijawodja woijawdo awodj wfonawoifjn " />
+        tools:text="akawj aw awoiaw awiodjawoijw oijawoja wodijawodja woijawdo awodj wfonawoifjn " />
 
     <TextView
         android:id="@+id/mapStoryDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Friday, 22 April 2022 23:20 PM"
-        android:textSize="12sp"
         android:layout_marginStart="15dp"
         android:layout_marginBottom="10dp"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cardView" />
+        app:layout_constraintStart_toEndOf="@+id/cardView"
+        tools:text="Friday, 22 April 2022 23:20 PM" />
+
+    <ProgressBar
+        android:id="@+id/mapProgressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="cardView,mapStoryName,mapStoryDesc,mapStoryDate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

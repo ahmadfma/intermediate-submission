@@ -1,17 +1,23 @@
 package com.ahmadfma.intermediate_submission1.ui.map
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.lifecycle.ViewModelProvider
 import com.ahmadfma.intermediate_submission1.R
 import com.ahmadfma.intermediate_submission1.data.Result
 import com.ahmadfma.intermediate_submission1.data.model.GetStoryResponse
 import com.ahmadfma.intermediate_submission1.data.model.ListStoryItem
 import com.ahmadfma.intermediate_submission1.databinding.ActivityMapsBinding
+import com.ahmadfma.intermediate_submission1.helper.convertToDate
+import com.ahmadfma.intermediate_submission1.ui.detail.DetailActivity
 import com.ahmadfma.intermediate_submission1.viewmodel.StoryViewModel
 import com.ahmadfma.intermediate_submission1.viewmodel.ViewModelFactory
+import com.bumptech.glide.Glide
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -26,9 +32,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityMapsBinding
     private lateinit var viewModel: StoryViewModel
     private var listStory : List<ListStoryItem>? = null
-    private companion object {
-        const val TAG = "MapsActivity"
-    }
+    private var currentShowIndex = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,29 +48,66 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
     }
 
-    private fun initListener() {
-        viewModel.getStoriesWithLocation().observe(this) { result ->
+    private fun initListener() = with(binding) {
+        viewModel.getStoriesWithLocation().observe(this@MapsActivity) { result ->
             when(result) {
                 is Result.Loading -> {
-                    Log.d(TAG, "getStoriesWithLocation: loading")
+                    showLoadingInBottomStory(true)
                 }
                 is Result.Error -> {
-                    Log.e(TAG, "getStoriesWithLocation: error = ${result.error}")
+                    showLoadingInBottomStory(false)
+                    Toast.makeText(this@MapsActivity, result.error, Toast.LENGTH_SHORT).show()
                 }
                 is Result.Success -> {
-                    Log.d(TAG, "getStoriesWithLocation: success : ${result.data}")
                     val response = result.data
                     if(response != null) {
                         if(!response.error) {
+                            showLoadingInBottomStory(false)
                             setMarkers(response)
                         } else {
-                            Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MapsActivity, response.message, Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MapsActivity, getString(R.string.error), Toast.LENGTH_SHORT).show()
                     }
                 }
             }
+        }
+
+        prevBtn.setOnClickListener {
+           listStory?.let {
+               if(currentShowIndex != 0) {
+                   currentShowIndex--
+               } else {
+                   currentShowIndex = it.size-1
+               }
+               moveCamera(currentShowIndex)
+           }
+        }
+
+        nextBtn.setOnClickListener {
+            listStory?.let {
+                if(currentShowIndex != it.size-1) {
+                    currentShowIndex++
+                } else {
+                    currentShowIndex = 0
+                }
+                moveCamera(currentShowIndex)
+            }
+        }
+
+        mapsToolbar.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.menu1 -> {
+                    Toast.makeText(this@MapsActivity, "menu1", Toast.LENGTH_SHORT).show()
+                    return@setOnMenuItemClickListener true
+                }
+            }
+            return@setOnMenuItemClickListener false
+        }
+
+        mapsToolbar.setNavigationOnClickListener {
+            onBackPressed()
         }
     }
 
@@ -81,17 +122,39 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     mMap.addMarker(MarkerOptions().position(position).title(it.name))
                 }
             }
-            moveCamera(0)
+            moveCamera(currentShowIndex)
         } else {
             Toast.makeText(this, getString(R.string.empty), Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun moveCamera(index: Int) {
-        val lat = listStory?.get(index)?.latitude
-        val lon = listStory?.get(index)?.longitude
-        if(lat != null && lon != null) {
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lon), 10f))
+    private fun moveCamera(index: Int) = with(binding) {
+        val data = listStory?.get(index)
+        if(data != null) {
+            if(data.latitude != null && data.longitude != null) {
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(data.latitude, data.longitude), 10f))
+                Glide.with(this@MapsActivity)
+                    .load(data.photoUrl)
+                    .placeholder(R.drawable.talk)
+                    .error(R.drawable.talk2)
+                    .into(mapStory.mapStoryImage)
+                mapStory.mapStoryName.text = data.name
+                mapStory.mapStoryDesc.text = data.description?.trim()
+                mapStory.mapStoryDate.text = data.createdAt?.convertToDate()
+                mapStory.mapStoryImage.setOnClickListener {
+                    val optionsCompat: ActivityOptionsCompat =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        this@MapsActivity,
+                        Pair(mapStory.mapStoryImage, getString(R.string.transition_image)),
+                        Pair(mapStory.mapStoryName, getString(R.string.transition_username)),
+                        Pair(mapStory.mapStoryDesc, getString(R.string.transition_description)),
+                        Pair(mapStory.mapStoryDate, getString(R.string.transition_date)),
+                    )
+                    val intent = Intent(this@MapsActivity, DetailActivity::class.java)
+                    intent.putExtra(DetailActivity.EXTRA_STORY, data)
+                    startActivity(intent, optionsCompat.toBundle())
+                }
+            }
         }
     }
 
@@ -102,4 +165,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.uiSettings.isCompassEnabled = true
         mMap.uiSettings.isMapToolbarEnabled = true
     }
+
+    private fun showLoadingInBottomStory(isLoading: Boolean) = with(binding) {
+        if(isLoading) {
+            mapStory.group.visibility = View.GONE
+            mapStory.mapProgressBar.visibility = View.VISIBLE
+        } else {
+            mapStory.group.visibility = View.VISIBLE
+            mapStory.mapProgressBar.visibility = View.GONE
+        }
+    }
+
 }
