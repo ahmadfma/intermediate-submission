@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.ahmadfma.intermediate_submission1.data.model.MessageResponse
 import com.ahmadfma.intermediate_submission1.data.repository.AuthenticationRepository
 import com.ahmadfma.intermediate_submission1.data.Result
+import com.ahmadfma.intermediate_submission1.data.model.LoginResponse
 import com.ahmadfma.intermediate_submission1.viewmodel.AuthenticationViewModel
 import com.ahmadfma.intermediate_submission1.viewmodel.MainCoroutineRule
 import com.ahmadfma.intermediate_submission1.viewmodel.getOrAwaitValue
@@ -63,6 +64,23 @@ class AuthenticationViewModelTest {
     }
 
     @Test
-    fun loginUser() {
+    fun `when email and password valid, login should be success`() {
+        val expectedMessage = "Login Success"
+        val expectedResponse = LoginResponse(error = false, message = expectedMessage)
+        val expectedValue = MutableLiveData<Result<LoginResponse?>>()
+        expectedValue.value = Result.Success(expectedResponse)
+
+        val email = "ahmadfathanah05@gmail.com"
+        val password = "123456"
+
+        `when`(authenticationViewModel.loginUser(email, password)).thenReturn(expectedValue)
+        val actualValue = authenticationViewModel.loginUser(email, password).getOrAwaitValue()
+        Mockito.verify(authenticationRepository).login(email, password)
+
+        Assert.assertTrue(Validator.isEmailValid(email))
+        Assert.assertTrue(password.length >= 6)
+        Assert.assertNotNull(actualValue)
+        Assert.assertTrue(actualValue is Result.Success)
+        Assert.assertEquals(expectedMessage, (actualValue as Result.Success).data?.message)
     }
 }
