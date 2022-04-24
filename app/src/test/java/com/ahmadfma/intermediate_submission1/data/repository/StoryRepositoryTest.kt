@@ -1,4 +1,4 @@
-package com.ahmadfma.intermediate_submission1.repository.story
+package com.ahmadfma.intermediate_submission1.data.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.PagingSource
