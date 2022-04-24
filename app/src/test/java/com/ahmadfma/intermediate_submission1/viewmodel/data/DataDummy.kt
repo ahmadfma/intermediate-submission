@@ -12,7 +12,9 @@ object DataDummy {
                 photoUrl = "url",
                 name = "Ahmad $i",
                 createdAt = "2022-01-08T06:34:18.598Z",
-                description = "desc $i"
+                description = "desc $i",
+                latitude = 11.1,
+                longitude = 11.1
             ))
         }
         return newList

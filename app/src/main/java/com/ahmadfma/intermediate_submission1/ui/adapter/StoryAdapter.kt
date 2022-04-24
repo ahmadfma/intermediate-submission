@@ -58,7 +58,7 @@ class StoryAdapter: PagingDataAdapter<ListStoryItem, StoryAdapter.Holder>(DIFF_C
     }
 
     companion object {
-        private val DIFF_CALLBACK: DiffUtil.ItemCallback<ListStoryItem> = object : DiffUtil.ItemCallback<ListStoryItem>() {
+        val DIFF_CALLBACK: DiffUtil.ItemCallback<ListStoryItem> = object : DiffUtil.ItemCallback<ListStoryItem>() {
             override fun areItemsTheSame(oldStory: ListStoryItem, newStory: ListStoryItem): Boolean {
                 return oldStory.photoUrl == newStory.photoUrl
             }

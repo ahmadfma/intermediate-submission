@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.ahmadfma.intermediate_submission1.viewmodel
 
 import kotlinx.coroutines.Dispatchers
@@ -10,7 +12,7 @@ import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 
 @ExperimentalCoroutinesApi
-class MainCoroutineRule(private val dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()):
+class MainCoroutineRule(val dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()):
     TestWatcher(),
     TestCoroutineScope by TestCoroutineScope(dispatcher) {
     override fun starting(description: Description?) {
