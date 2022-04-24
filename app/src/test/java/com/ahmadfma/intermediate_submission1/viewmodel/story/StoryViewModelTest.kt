@@ -9,8 +9,8 @@ import com.ahmadfma.intermediate_submission1.data.Result
 import com.ahmadfma.intermediate_submission1.data.model.ListStoryItem
 import com.ahmadfma.intermediate_submission1.data.model.MessageResponse
 import com.ahmadfma.intermediate_submission1.ui.adapter.StoryAdapter
-import com.ahmadfma.intermediate_submission1.MainCoroutineRule
-import com.ahmadfma.intermediate_submission1.DataDummy
+import com.ahmadfma.intermediate_submission1.utils.MainCoroutineRule
+import com.ahmadfma.intermediate_submission1.data.DataDummy
 import com.ahmadfma.intermediate_submission1.viewmodel.StoryViewModel
 import com.ahmadfma.intermediate_submission1.getOrAwaitValue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
