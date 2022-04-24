@@ -1,4 +1,4 @@
-package com.ahmadfma.intermediate_submission1.viewmodel
+package com.ahmadfma.intermediate_submission1
 
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData

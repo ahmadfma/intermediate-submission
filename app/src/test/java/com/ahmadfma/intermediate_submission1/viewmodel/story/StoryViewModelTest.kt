@@ -1,4 +1,4 @@
-package com.ahmadfma.intermediate_submission1.viewmodel.ui.story
+package com.ahmadfma.intermediate_submission1.viewmodel.story
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
@@ -9,10 +9,10 @@ import com.ahmadfma.intermediate_submission1.data.Result
 import com.ahmadfma.intermediate_submission1.data.model.ListStoryItem
 import com.ahmadfma.intermediate_submission1.data.model.MessageResponse
 import com.ahmadfma.intermediate_submission1.ui.adapter.StoryAdapter
-import com.ahmadfma.intermediate_submission1.viewmodel.MainCoroutineRule
+import com.ahmadfma.intermediate_submission1.MainCoroutineRule
+import com.ahmadfma.intermediate_submission1.DataDummy
 import com.ahmadfma.intermediate_submission1.viewmodel.StoryViewModel
-import com.ahmadfma.intermediate_submission1.viewmodel.data.DataDummy
-import com.ahmadfma.intermediate_submission1.viewmodel.getOrAwaitValue
+import com.ahmadfma.intermediate_submission1.getOrAwaitValue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runBlockingTest

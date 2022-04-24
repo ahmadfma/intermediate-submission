@@ -1,4 +1,4 @@
-package com.ahmadfma.intermediate_submission1.viewmodel.data
+package com.ahmadfma.intermediate_submission1
 
 import com.ahmadfma.intermediate_submission1.data.model.ListStoryItem
 

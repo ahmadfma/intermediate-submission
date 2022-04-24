@@ -1,6 +1,6 @@
 @file:Suppress("DEPRECATION")
 
-package com.ahmadfma.intermediate_submission1.viewmodel
+package com.ahmadfma.intermediate_submission1
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
