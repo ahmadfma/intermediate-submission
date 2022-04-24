@@ -10,11 +10,10 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import com.ahmadfma.intermediate_submission1.R
+import com.ahmadfma.intermediate_submission1.helper.Validator
 
 class CustomEditText : AppCompatEditText, View.OnTouchListener {
     private lateinit var errorButtonImage: Drawable
-    private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
-
     constructor(context: Context) : super(context) {init()}
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {init()}
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {init()}
@@ -44,7 +43,7 @@ class CustomEditText : AppCompatEditText, View.OnTouchListener {
                                 error = context.getString(R.string.error_password)
                         }
                         InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS -> {
-                            if(!isEmailValid())
+                            if(Validator.isEmailValid(text.toString()))
                                 error = context.getString(R.string.error_invalid_email)
                         }
                         InputType.TYPE_TEXT_FLAG_MULTI_LINE -> {
@@ -60,10 +59,6 @@ class CustomEditText : AppCompatEditText, View.OnTouchListener {
 
     override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
         return false
-    }
-
-    private fun isEmailValid() : Boolean {
-       return text.toString().matches(emailPattern.toRegex())
     }
 
 }
