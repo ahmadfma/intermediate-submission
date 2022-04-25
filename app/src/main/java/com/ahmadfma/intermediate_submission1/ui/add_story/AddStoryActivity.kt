@@ -74,25 +74,22 @@ class AddStoryActivity : AppCompatActivity() {
     }
 
     private fun checkInputs() = with(binding) {
-        var isValid = false
         descLayout.descInput.clearFocus()
         if(selectedImageFile == null) {
             Toast.makeText(this@AddStoryActivity, getString(R.string.error_select_image), Toast.LENGTH_SHORT).show()
         } else if(!Validator.isAllFormFilled(arrayOf(descLayout.descInput))) {
             Toast.makeText(this@AddStoryActivity, getString(R.string.error_form_not_filled), Toast.LENGTH_SHORT).show()
-        } else  {
-            isValid = true
-        }
-
-        if(isValid) {
-            val description = descLayout.descInput.text.toString().toRequestBody("text/plain".toMediaType())
-            val requestImageFile = selectedImageFile!!.asRequestBody("image/jpeg".toMediaTypeOrNull())
-            val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
-                "photo",
-                selectedImageFile!!.name,
-                requestImageFile
-            )
-            uploadListener(imageMultipart, description)
+        } else {
+            selectedImageFile?.let {
+                val description = descLayout.descInput.text.toString().toRequestBody("text/plain".toMediaType())
+                val requestImageFile = it.asRequestBody("image/jpeg".toMediaTypeOrNull())
+                val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
+                    "photo",
+                    it.name,
+                    requestImageFile
+                )
+                uploadListener(imageMultipart, description)
+            }
         }
     }
 

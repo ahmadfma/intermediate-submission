@@ -19,7 +19,7 @@ data class GetStoryResponse(
 ) : Parcelable
 
 
-@Entity(tableName = "list_story")
+@Entity(tableName = ListStoryItem.TABLE_NAME)
 @Parcelize
 data class ListStoryItem(
 
@@ -45,4 +45,8 @@ data class ListStoryItem(
 	@field:SerializedName("lon")
 	val longitude: Double? = null,
 
-) : Parcelable
+) : Parcelable {
+	companion object {
+		const val TABLE_NAME = "list_story"
+	}
+}

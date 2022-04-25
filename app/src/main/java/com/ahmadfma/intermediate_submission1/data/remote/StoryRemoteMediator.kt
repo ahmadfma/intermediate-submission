@@ -1,6 +1,5 @@
 package com.ahmadfma.intermediate_submission1.data.remote
 
-import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -14,12 +13,10 @@ import com.ahmadfma.intermediate_submission1.data.model.ListStoryItem
 class StoryRemoteMediator (private val database: StoryDatabase, private val apiService: ApiService) : RemoteMediator<Int, ListStoryItem>() {
 
     private companion object {
-        const val TAG = "StoryRemoteMediator"
         const val INITIAL_PAGE_INDEX = 1
     }
 
     override suspend fun initialize(): InitializeAction {
-        Log.d(TAG, "initialize: ")
         return InitializeAction.LAUNCH_INITIAL_REFRESH
     }
 

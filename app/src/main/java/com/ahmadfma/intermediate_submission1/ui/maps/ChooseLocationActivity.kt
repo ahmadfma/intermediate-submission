@@ -58,7 +58,7 @@ class ChooseLocationActivity : AppCompatActivity(), OnMapReadyCallback {
                 setResult(RESULT_OK, intent)
                 finish()
             } else {
-                Toast.makeText(this@ChooseLocationActivity, "Please select your location", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ChooseLocationActivity, getString(R.string.please_select_your_location), Toast.LENGTH_SHORT).show()
             }
         }
         backBtn.setOnClickListener {
@@ -71,16 +71,16 @@ class ChooseLocationActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.setOnMapClickListener {
             selectedLatLng = it
             mMap.clear()
-            mMap.addMarker(MarkerOptions().position(it).title("Your location"))
+            mMap.addMarker(MarkerOptions().position(it).title(getString(R.string.your_location)))
             binding.mapPick.mapLatLng.text = StringBuilder("${it.latitude.toFloat()}").append(", ${it.longitude.toFloat()}")
         }
         if(selectedLatLng != null) {
             selectedLatLng?.let {
-                mMap.addMarker(MarkerOptions().position(it).title("Your location"))
+                mMap.addMarker(MarkerOptions().position(it).title(getString(R.string.your_location)))
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(it, 20f))
             }
         } else {
-            mMap.addMarker(MarkerOptions().position(defaultLocation).title("Your location"))
+            mMap.addMarker(MarkerOptions().position(defaultLocation).title(getString(R.string.your_location)))
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 20f))
         }
         setMyLocation()

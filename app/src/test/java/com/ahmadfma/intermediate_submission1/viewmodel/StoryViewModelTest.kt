@@ -1,4 +1,4 @@
-package com.ahmadfma.intermediate_submission1.viewmodel.story
+package com.ahmadfma.intermediate_submission1.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData

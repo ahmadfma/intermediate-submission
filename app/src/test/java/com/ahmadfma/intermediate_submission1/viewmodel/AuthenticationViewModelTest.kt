@@ -1,4 +1,4 @@
-package com.ahmadfma.intermediate_submission1.viewmodel.authentication
+package com.ahmadfma.intermediate_submission1.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
@@ -6,7 +6,6 @@ import com.ahmadfma.intermediate_submission1.data.model.MessageResponse
 import com.ahmadfma.intermediate_submission1.data.repository.AuthenticationRepository
 import com.ahmadfma.intermediate_submission1.data.Result
 import com.ahmadfma.intermediate_submission1.data.model.LoginResponse
-import com.ahmadfma.intermediate_submission1.viewmodel.AuthenticationViewModel
 import com.ahmadfma.intermediate_submission1.utils.MainCoroutineRule
 import com.ahmadfma.intermediate_submission1.getOrAwaitValue
 import kotlinx.coroutines.ExperimentalCoroutinesApi

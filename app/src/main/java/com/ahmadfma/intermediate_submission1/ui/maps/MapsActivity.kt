@@ -101,16 +101,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
 
-        mapsToolbar.setOnMenuItemClickListener {
-            when(it.itemId) {
-                R.id.menu1 -> {
-                    Toast.makeText(this@MapsActivity, "menu1", Toast.LENGTH_SHORT).show()
-                    return@setOnMenuItemClickListener true
-                }
-            }
-            return@setOnMenuItemClickListener false
-        }
-
         mapsToolbar.setNavigationOnClickListener {
             onBackPressed()
         }

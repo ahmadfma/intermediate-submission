@@ -35,7 +35,6 @@ class HomeFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentHomeBinding.inflate(inflater)
-        Log.d(TAG, "onCreateView: ")
         setHasOptionsMenu(true)
         initVariable()
         initListener()
@@ -96,7 +95,7 @@ class HomeFragment : Fragment() {
 
     private fun updateStackWidget(stories: List<ListStoryItem>) {
         if(stories.isNotEmpty()) {
-            Log.d(TAG, "updateStackWidget: send broadcas")
+            Log.d(TAG, "updateStackWidget: send broadcast")
             val response = GetStoryResponse(
                 listStory = stories,
                 message = "updateStackWidget",
