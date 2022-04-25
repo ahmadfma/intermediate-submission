@@ -96,7 +96,7 @@ class HomeFragment : Fragment() {
 
     private fun updateStackWidget(stories: List<ListStoryItem>) {
         if(stories.isNotEmpty()) {
-            Log.d(TAG, "updateStackWidget: send broadcast")
+            Log.d(TAG, "updateStackWidget: send broadcas")
             val response = GetStoryResponse(
                 listStory = stories,
                 message = "updateStackWidget",

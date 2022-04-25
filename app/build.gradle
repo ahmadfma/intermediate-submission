@@ -23,6 +23,12 @@ android {
         viewBinding true
     }
 
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/AL2.0', 'META-INF/LGPL2.1']
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -30,12 +36,15 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '11'
+        jvmTarget = '1.8'
         freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
+    }
+    testOptions {
+        animationsDisabled = true
     }
 }
 
@@ -61,7 +70,8 @@ dependencies {
 
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
-    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.5"
+    //noinspection GradleDependency
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
 
     implementation 'com.github.bumptech.glide:glide:4.13.1'
 
@@ -77,8 +87,16 @@ dependencies {
     implementation "androidx.paging:paging-runtime-ktx:3.1.1"
     implementation 'androidx.room:room-paging:2.5.0-alpha01'
 
-    testImplementation "androidx.arch.core:core-testing:2.1.0" // InstantTaskExecutorRule
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0" //main coroutine rule
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0" // InstantTaskExecutorRule
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0" //main coroutine rule
+    debugImplementation "androidx.fragment:fragment-testing:1.4.1"
+
     testImplementation 'org.mockito:mockito-core:3.12.4'
     testImplementation 'org.mockito:mockito-inline:3.12.4'
+
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:4.9.3"
+    androidTestImplementation "com.squareup.okhttp3:okhttp-tls:4.9.3"
+    implementation 'androidx.test.espresso:espresso-idling-resource:3.4.0'
+
+    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.2'
 }
