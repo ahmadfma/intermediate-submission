@@ -29,6 +29,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding : FragmentHomeBinding
     private lateinit var viewModel: StoryViewModel
     private lateinit var storyAdapter: StoryAdapter
+    private var shouldRefresh = true
     private companion object {
         const val TAG = "HomeFragment"
     }
@@ -58,6 +59,7 @@ class HomeFragment : Fragment() {
     private fun initListener() {
         storyAdapter.setListener(object : StoryAdapter.OnItemClickListener {
             override fun onItemClick(listStoryItem: ListStoryItem, storyBinding: ItemStoryBinding) {
+                shouldRefresh = false
                 val intent = Intent(requireActivity(), DetailActivity::class.java)
                 val optionsCompat: ActivityOptionsCompat =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(
@@ -95,7 +97,6 @@ class HomeFragment : Fragment() {
 
     private fun updateStackWidget(stories: List<ListStoryItem>) {
         if(stories.isNotEmpty()) {
-            Log.d(TAG, "updateStackWidget: send broadcast")
             val response = GetStoryResponse(
                 listStory = stories,
                 message = "updateStackWidget",
@@ -112,7 +113,9 @@ class HomeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        storyAdapter.refresh()
+        if(shouldRefresh) {
+            storyAdapter.refresh()
+        }
     }
 
 
