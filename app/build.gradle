@@ -15,18 +15,11 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildFeatures {
         viewBinding true
-    }
-
-    packagingOptions {
-        resources {
-            excludes += ['META-INF/AL2.0', 'META-INF/LGPL2.1']
-        }
     }
 
     buildTypes {
@@ -88,6 +81,8 @@ dependencies {
     implementation "androidx.paging:paging-runtime-ktx:3.1.1"
     implementation 'androidx.room:room-paging:2.5.0-alpha01'
 
+    testImplementation "androidx.arch.core:core-testing:2.1.0" // InstantTaskExecutorRule
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0" //main coroutine rule
     androidTestImplementation "androidx.arch.core:core-testing:2.1.0" // InstantTaskExecutorRule
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0" //main coroutine rule
     debugImplementation "androidx.fragment:fragment-testing:1.4.1"

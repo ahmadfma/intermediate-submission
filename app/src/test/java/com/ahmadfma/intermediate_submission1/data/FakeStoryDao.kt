@@ -14,11 +14,7 @@ class FakeStoryDao: StoryDao {
     }
 
     override fun getStories(): PagingSource<Int, ListStoryItem> {
-        return if(fakeStories.isEmpty()) {
-            PagingSourceUtils(DataDummy.generateDummyStories())
-        } else {
-            PagingSourceUtils(fakeStories)
-        }
+        return PagingSourceUtils(fakeStories)
     }
 
     override suspend fun deleteAll() {

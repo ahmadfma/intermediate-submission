@@ -67,6 +67,27 @@ class StoryViewModelTest {
     }
 
     @Test
+    fun `when stories in database empty and network error, getStories should return empty list`() = mainCoroutineRule.runBlockingTest{
+        val expectedStories = MutableLiveData<PagingData<ListStoryItem>>()
+        expectedStories.value = PagingData.from(listOf())
+        `when`(storyViewModel.stories).thenReturn(expectedStories)
+
+        val actualStories = storyViewModel.stories.getOrAwaitValue()
+        val differ = AsyncPagingDataDiffer(
+            diffCallback = StoryAdapter.DIFF_CALLBACK,
+            updateCallback = noopListUpdateCallback,
+            mainDispatcher = mainCoroutineRule.dispatcher,
+            workerDispatcher = mainCoroutineRule.dispatcher,
+        )
+        differ.submitData(actualStories)
+        advanceUntilIdle()
+
+        Mockito.verify(storyViewModel).stories
+        Assert.assertNotNull(actualStories)
+        Assert.assertTrue(differ.snapshot().isEmpty())
+    }
+
+    @Test
     fun `when getStoriesWithLocation stories should has latitude and longitude`() = mainCoroutineRule.runBlockingTest {
         val expectedStories = MutableLiveData<PagingData<ListStoryItem>>()
         expectedStories.value = PagingData.from(dummyStories)
@@ -97,11 +118,7 @@ class StoryViewModelTest {
 
         val file = File("testing")
         val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-        val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
-            "photo",
-            file.name,
-            requestImageFile
-        )
+        val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData("photo", file.name, requestImageFile)
         val description = "testing description".toRequestBody()
 
         `when`(storyViewModel.addNewStories(imageMultipart, description)).thenReturn(expectedValue)
@@ -112,6 +129,26 @@ class StoryViewModelTest {
         Assert.assertTrue(actualValue is Result.Success)
         Assert.assertEquals(expectedMessage, (actualValue as Result.Success).data?.message)
     }
+
+    @Test
+    fun `when network error, addNewStory should return error`() {
+        val message = "ERROR"
+        val expectedValue = MutableLiveData<Result<MessageResponse?>>()
+        expectedValue.value = Result.Error(message)
+        val file = File("testing")
+        val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+        val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData("photo", file.name, requestImageFile)
+        val description = "testing description".toRequestBody()
+
+        `when`(storyViewModel.addNewStories(imageMultipart, description)).thenReturn(expectedValue)
+        val actualValue = storyViewModel.addNewStories(imageMultipart, description).getOrAwaitValue()
+
+        Mockito.verify(storyViewModel).addNewStories(imageMultipart, description)
+
+        Assert.assertTrue(actualValue is Result.Error)
+        Assert.assertEquals(message, (actualValue as Result.Error).error)
+    }
+
 }
 
 val noopListUpdateCallback = object : ListUpdateCallback {
