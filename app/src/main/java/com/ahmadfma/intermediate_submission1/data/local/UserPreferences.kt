@@ -1,6 +1,7 @@
 package com.ahmadfma.intermediate_submission1.data.local
 
 import android.content.Context
+import androidx.core.content.edit
 import com.ahmadfma.intermediate_submission1.data.model.UserData
 
 class UserPreferences(context: Context) {
@@ -15,10 +16,11 @@ class UserPreferences(context: Context) {
     private val preferences = context.getSharedPreferences(USER_PREF, Context.MODE_PRIVATE)
 
     fun setUser(data: UserData) {
-        val editor = preferences.edit()
-        editor.putString(USER_TOKEN, data.token)
-        editor.putString(USER_NAME, data.name)
-        editor.apply()
+        preferences.edit {
+            putString(USER_TOKEN, data.token)
+            putString(USER_NAME, data.name)
+            apply()
+        }
         user = data
     }
 

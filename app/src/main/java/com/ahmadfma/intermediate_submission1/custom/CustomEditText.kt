@@ -34,22 +34,19 @@ class CustomEditText : AppCompatEditText, View.OnTouchListener {
         }
 
         setOnFocusChangeListener { _, hasFocus ->
-            when(hasFocus) {
-                true -> {}
-                false -> {
-                    when(inputType-1) {
-                        InputType.TYPE_TEXT_VARIATION_PASSWORD -> {
-                            if(text != null && text!!.length < 6)
-                                error = context.getString(R.string.error_password)
-                        }
-                        InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS -> {
-                            if(Validator.isEmailValid(text.toString()))
-                                error = context.getString(R.string.error_invalid_email)
-                        }
-                        InputType.TYPE_TEXT_FLAG_MULTI_LINE -> {
-                            if(text != null && text!!.isEmpty())
-                                error = context.getString(R.string.error_description)
-                        }
+            if(!hasFocus) {
+                when(inputType-1) {
+                    InputType.TYPE_TEXT_VARIATION_PASSWORD -> {
+                        if(text != null && text!!.length < 6)
+                            error = context.getString(R.string.error_password)
+                    }
+                    InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS -> {
+                        if(Validator.isEmailValid(text.toString()))
+                            error = context.getString(R.string.error_invalid_email)
+                    }
+                    InputType.TYPE_TEXT_FLAG_MULTI_LINE -> {
+                        if(text != null && text!!.isEmpty())
+                            error = context.getString(R.string.error_description)
                     }
                 }
             }

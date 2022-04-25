@@ -15,7 +15,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.ahmadfma.intermediate_submission1.R
 import com.ahmadfma.intermediate_submission1.helper.EspressoIdlingResource
-import com.ahmadfma.intermediate_submission1.ui.add_story.AddStoryActivity
 import com.ahmadfma.intermediate_submission1.ui.detail.DetailActivity
 import com.ahmadfma.intermediate_submission1.ui.main.MainActivity
 import com.ahmadfma.intermediate_submission1.ui.maps.MapsActivity
@@ -64,15 +63,6 @@ class MainActivityTest {
         onView(withId(R.id.gotoMaps)).perform(click())
         Intents.intended(hasComponent(MapsActivity::class.java.name))
         onView(withId(R.id.map)).check(matches(isDisplayed()))
-        Intents.release()
-    }
-
-    @Test
-    fun when_click_add_button_should_navigate_to_AddStoryActivity() {
-        Intents.init()
-        onView(withId(R.id.newStoryBtn)).perform(click())
-        Intents.intended(hasComponent(AddStoryActivity::class.java.name))
-        onView(withId(R.id.uploadBtn)).check(matches(isDisplayed()))
         Intents.release()
     }
 

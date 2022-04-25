@@ -50,6 +50,7 @@ class StoryRepositoryTest {
         val actualValue = apiService.getStories("token", 1, 1)
         Assert.assertNotNull(actualValue)
         Assert.assertEquals(expectedValue.size, actualValue.body()?.listStory?.size)
+        Assert.assertTrue(actualValue.body()?.listStory?.get(0)?.latitude != null)
     }
 
     @Test

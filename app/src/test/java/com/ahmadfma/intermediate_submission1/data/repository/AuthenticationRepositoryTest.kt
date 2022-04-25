@@ -13,6 +13,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import retrofit2.Response
+import java.lang.Exception
 
 @ExperimentalCoroutinesApi
 class AuthenticationRepositoryTest {
@@ -40,6 +41,22 @@ class AuthenticationRepositoryTest {
         Assert.assertNotNull(actualValue)
         Assert.assertTrue(!actualValue.body()!!.error)
         Assert.assertTrue(actualValue.body() == expectedValue.body())
+    }
+
+    @Test(expected = Exception::class)
+    fun `when email invalid, register should return error`() = runTest {
+        val username = "ahmad"
+        val email = "ahsdas gmail.com"
+        val password = "123423"
+        apiService.registerUser(username, email, password)
+    }
+
+    @Test(expected = Exception::class)
+    fun `when password less than 6 characters, register should return error`() = runTest {
+        val username = "ahmad"
+        val email = "ahsdas@gmail.com"
+        val password = "1223"
+        apiService.registerUser(username, email, password)
     }
 
     @Test

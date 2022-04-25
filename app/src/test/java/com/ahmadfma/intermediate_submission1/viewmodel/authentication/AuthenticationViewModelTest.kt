@@ -64,6 +64,23 @@ class AuthenticationViewModelTest {
     }
 
     @Test
+    fun `when email already taken, register should failed`() {
+        val expectedMessage = "Email already taken"
+        val expectedValue = MutableLiveData<Result<MessageResponse?>>()
+        expectedValue.value = Result.Error(expectedMessage)
+
+        val username = "ahmad"
+        val email = "ahmadfathanah05@gmail.com"
+        val password = "123456"
+        `when`(authenticationViewModel.registerUser(username, email, password)).thenReturn(expectedValue)
+        val actualValue = authenticationViewModel.registerUser(username, email, password).getOrAwaitValue()
+        Mockito.verify(authenticationRepository).register(username, email, password)
+
+        Assert.assertTrue(actualValue is Result.Error)
+        Assert.assertTrue((actualValue as Result.Error).error == expectedMessage)
+    }
+
+    @Test
     fun `when email and password valid, login should be success`() {
         val expectedMessage = "Login Success"
         val expectedResponse = LoginResponse(error = false, message = expectedMessage)
