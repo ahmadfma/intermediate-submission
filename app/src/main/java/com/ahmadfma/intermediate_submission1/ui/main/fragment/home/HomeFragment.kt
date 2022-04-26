@@ -83,10 +83,12 @@ class HomeFragment : Fragment() {
         binding.homeToolbar.setOnMenuItemClickListener {
             when(it.itemId) {
                 R.id.settingMenu -> {
+                    shouldRefresh = false
                     startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
                     return@setOnMenuItemClickListener  true
                 }
                 R.id.gotoMaps -> {
+                    shouldRefresh = false
                     startActivity(Intent(requireActivity(), MapsActivity::class.java))
                 }
             }
