@@ -1,7 +1,6 @@
 package com.ahmadfma.intermediate_submission1.data.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingSource
 import com.ahmadfma.intermediate_submission1.data.DataDummy
 import com.ahmadfma.intermediate_submission1.data.FakeApiService

@@ -41,7 +41,7 @@ class CustomEditText : AppCompatEditText, View.OnTouchListener {
                             error = context.getString(R.string.error_password)
                     }
                     InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS -> {
-                        if(Validator.isEmailValid(text.toString()))
+                        if(!Validator.isEmailValid(text.toString()))
                             error = context.getString(R.string.error_invalid_email)
                     }
                     InputType.TYPE_TEXT_FLAG_MULTI_LINE -> {

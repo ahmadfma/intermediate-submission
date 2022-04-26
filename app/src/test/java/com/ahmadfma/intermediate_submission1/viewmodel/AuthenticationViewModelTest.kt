@@ -7,7 +7,7 @@ import com.ahmadfma.intermediate_submission1.data.repository.AuthenticationRepos
 import com.ahmadfma.intermediate_submission1.data.Result
 import com.ahmadfma.intermediate_submission1.data.model.LoginResponse
 import com.ahmadfma.intermediate_submission1.utils.MainCoroutineRule
-import com.ahmadfma.intermediate_submission1.getOrAwaitValue
+import com.ahmadfma.intermediate_submission1.utils.getOrAwaitValue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Assert
 import org.junit.Before

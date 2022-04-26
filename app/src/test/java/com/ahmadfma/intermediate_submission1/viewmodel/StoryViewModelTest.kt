@@ -11,8 +11,7 @@ import com.ahmadfma.intermediate_submission1.data.model.MessageResponse
 import com.ahmadfma.intermediate_submission1.ui.adapter.StoryAdapter
 import com.ahmadfma.intermediate_submission1.utils.MainCoroutineRule
 import com.ahmadfma.intermediate_submission1.data.DataDummy
-import com.ahmadfma.intermediate_submission1.viewmodel.StoryViewModel
-import com.ahmadfma.intermediate_submission1.getOrAwaitValue
+import com.ahmadfma.intermediate_submission1.utils.getOrAwaitValue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runBlockingTest

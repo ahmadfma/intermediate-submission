@@ -59,24 +59,22 @@ class StoryRepository(private val storyDatabase: StoryDatabase, private val apiS
 
     fun addStories(image: MultipartBody.Part, description: RequestBody, latitude: RequestBody? = null, longitude: RequestBody? = null) : LiveData<Result<MessageResponse?>> = liveData {
         emit(Result.Loading)
-        wrapEspressoIdlingResource {
-            try {
-                val returnValue = MutableLiveData<Result<MessageResponse?>>()
-                val response = apiService.addNewStories(image = image, description = description, latitude = latitude, longitude = longitude)
-                if(response.isSuccessful) {
-                    returnValue.value = Result.Success(response.body())
-                    delay(1500)
-                    emitSource(returnValue)
-                } else {
-                    val error = Gson().fromJson(response.errorBody()?.stringSuspending(), MessageResponse::class.java)
-                    response.errorBody()?.close()
-                    returnValue.value = Result.Success(error)
-                    emitSource(returnValue)
-                }
+        try {
+            val returnValue = MutableLiveData<Result<MessageResponse?>>()
+            val response = apiService.addNewStories(image = image, description = description, latitude = latitude, longitude = longitude)
+            if(response.isSuccessful) {
+                returnValue.value = Result.Success(response.body())
+                delay(1500)
+                emitSource(returnValue)
+            } else {
+                val error = Gson().fromJson(response.errorBody()?.stringSuspending(), MessageResponse::class.java)
+                response.errorBody()?.close()
+                returnValue.value = Result.Success(error)
+                emitSource(returnValue)
             }
-            catch (e: java.lang.Exception) {
-                emit(Result.Error(e.toString()))
-            }
+        }
+        catch (e: java.lang.Exception) {
+            emit(Result.Error(e.toString()))
         }
     }
 
