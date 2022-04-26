@@ -1,0 +1,44 @@
+# UNIT TEST
+    * ViewModel
+        1 StoryViewModel
+            ~ when getStories should not null
+            ~ when stories in database empty and network error, getStories should return empty list
+            ~ when getStoriesWithLocation stories should has latitude and longitude
+            ~ when image and description is not empty addNewStories should success
+            ~ when network error, addNewStory should return error
+        2. AuthenticationViewModel
+            ~ when username & email & password valid, register should be success
+            ~ when email already taken, register should failed
+            ~ when email and password valid, login should be success
+        3. MainActivityViewModel
+            ~ getSelectedFragment should return selected fragment
+
+    * Repository
+        1. StoryRepository
+            ~ getStoriesWithLocation should return stories that has latitude and longitude
+            ~ getStoriesWithPaging should return stories
+            ~ when no data, getStoriesWithPaging should return emptyList
+            ~ when image and desc is not empty addStories should success
+        2. AuthenticationRepository
+            ~ when username & email & password valid, register should success
+            ~ when email invalid, register should return error
+            ~ when password less than 6 characters, register should return error
+            ~ when email and password valid, login should success
+
+    * Helper
+        1. DateHelper
+            ~ when story's date format is valid, parsing should success
+            ~ when story's date format is invalid, parsing should failed
+        2. ValidatorTest
+            ~ when email is valid should return true
+            ~ when email is invalid should return false
+
+# Integration Test
+    * HomeFragment
+        ~ when fetch story success, story's recycler view should displayed and data displayed
+
+# End to End Test
+    * MainActivity
+        ~ after load story, story's recycler view should displayed and perform scrolling to position 5
+        ~ when click story should_navigate to DetailActivity
+        ~ when click map button should navigate to MapsActivity

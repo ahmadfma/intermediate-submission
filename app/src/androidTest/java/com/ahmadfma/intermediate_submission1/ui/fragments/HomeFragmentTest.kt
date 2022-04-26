@@ -2,9 +2,11 @@ package com.ahmadfma.intermediate_submission1.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.testing.launchFragmentInContainer
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
@@ -50,7 +52,13 @@ class HomeFragmentTest {
         mockWebServer.enqueue(mockResponse)
 
         onView(withId(R.id.rv_stories)).check(matches(isDisplayed()))
-        onView(withText("Dimas")).check(matches(isDisplayed()))
+        onView(withText("Lorem Ipsum")).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_stories))
+            .perform(
+                RecyclerViewActions.scrollTo<RecyclerView.ViewHolder>(
+                    hasDescendant(withText("Dimas3"))
+                )
+            )
     }
 
 }

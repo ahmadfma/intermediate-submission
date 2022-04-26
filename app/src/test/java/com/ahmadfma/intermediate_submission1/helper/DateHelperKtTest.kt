@@ -14,7 +14,7 @@ class DateHelperKtTest {
     }
 
     @Test
-    fun `when story's date format is valid, parsing should failed`() {
+    fun `when story's date format is invalid, parsing should failed`() {
         Assert.assertThrows(ParseException::class.java) {
             "2022-04-25 14:07:11.601Z".convertToDate()
         }
